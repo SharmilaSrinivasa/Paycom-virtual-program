@@ -1,16 +1,15 @@
 import React, { Component } from "react";
-import "./Signup.css";
+import "./Home.css";
 
-class Signup extends Component {
+class Home extends Component {
   render() {
     return (
       <div className="row">
         <div className="medium-12 columns">
-          <h3>Signup part</h3>
+          <h3>Home</h3>
         </div>
       </div>
     );
   }
 }
-
-export default Signup;
+export default Home;

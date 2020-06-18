@@ -1,9 +1,8 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import ReactDom from "react-dom";
 import Welcome from "./Welcome";
 
-test("Welcome renders learn react link", () => {
-  const { getByText } = render(<Welcome />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+it("Welcome renders without crashing", () => {
+  const div = document.createElement("div");
+  ReactDom.render(<Welcome />, div);
 });

@@ -1,9 +1,8 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import ReactDom from "react-dom";
 import Footer from "./Footer";
 
-test("Footer renders learn react link", () => {
-  const { getByText } = render(<Footer />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+it("Footer renders without crashing", () => {
+  const div = document.createElement("div");
+  ReactDom.render(<Footer />, div);
 });

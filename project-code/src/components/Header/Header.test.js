@@ -1,9 +1,8 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import ReactDom from "react-dom";
 import Header from "./Header";
 
-test("Header renders learn react link", () => {
-  const { getByText } = render(<Header />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+it("Header renders without crashing", () => {
+  const div = document.createElement("div");
+  ReactDom.render(<Header />, div);
 });

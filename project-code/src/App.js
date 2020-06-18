@@ -3,6 +3,7 @@ import Header from "./components/Header/Header";
 import MobileHeader from "./components/MobileHeader/MobileHeader";
 import Footer from "./components/Footer/Footer";
 import Welcome from "./components/Welcome/Welcome";
+import Routes from "./routes";
 import "./styles/foundation.min.css";
 import "./styles/custom.css";
 
@@ -21,7 +22,7 @@ class App extends Component {
           <div className="off-canvas-content" data-off-canvas-content>
             <MobileHeader name={this.state.appName} />
             <Header name={this.state.appName} />
-            <Welcome />
+            <Routes />
             <Footer />
           </div>
         </div>
