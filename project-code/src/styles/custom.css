@@ -13,3 +13,8 @@ body {
 .bodypart {
   min-height: 450px;
 }
+
+table.searchclass {
+  table-layout: auto;
+  width: 100%;
+}

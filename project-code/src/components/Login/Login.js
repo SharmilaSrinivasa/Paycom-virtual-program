@@ -23,14 +23,17 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="row small-up-2 medium-up-3 large-up-4">
+      <div className="row">
         <div className="column bodypart">
-          <p>
-            Don't have an account?
-            <a href="/signup" className="button">
-              Signup
-            </a>{" "}
-          </p>
+          <div className="rightshift">
+            <p>
+              Don't have an account?{" "}
+              <a href="/signup" className="button">
+                Signup
+              </a>{" "}
+            </p>
+          </div>
+
           <h3>Login</h3>
           <label>Email</label>
           <input

@@ -7,6 +7,8 @@ import Signup from "./components/Signup/Signup";
 import Home from "./components/Home/Home";
 import NotFound from "./components/NotFound/NotFound";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
+import CreateEvent from "./components/CreateEvent/CreateEvent";
+import UpdateEvent from "./components/UpdateEvent/UpdateEvent";
 
 const Routes = () => (
   <BrowserRouter>
@@ -16,6 +18,8 @@ const Routes = () => (
       <Route path="/forgotpassword" component={ForgotPassword} />
       <Route path="/signup" component={Signup} />
       <Route path="/home" component={Home} />
+      <Route path="/createevent" component={CreateEvent} />
+      <Route path="/updateevent" component={UpdateEvent} />
       <Route path="*" component={NotFound} />
     </Switch>
   </BrowserRouter>
