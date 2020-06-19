@@ -5,7 +5,7 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      email: "",
       password: "",
     };
     this.login = this.login.bind(this);
@@ -25,19 +25,25 @@ class Login extends Component {
     return (
       <div className="row small-up-2 medium-up-3 large-up-4">
         <div className="column bodypart">
+          <p>
+            Don't have an account?
+            <a href="/signup" className="button">
+              Signup
+            </a>{" "}
+          </p>
           <h3>Login</h3>
-          <label>Username</label>
+          <label>Email</label>
           <input
             type="text"
-            name="username"
-            placeholder="username"
+            name="email"
+            placeholder="Email"
             onChange={this.onChange}
           />
           <label>Password</label>
           <input
             type="password"
             name="password"
-            placeholder="password"
+            placeholder="Password"
             onChange={this.onChange}
           />
           <input
@@ -46,6 +52,7 @@ class Login extends Component {
             className="button"
             onClick={this.login}
           />
+          <a href="/forgotpassword">Forgot password?</a>
         </div>
       </div>
     );
