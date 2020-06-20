@@ -12,8 +12,9 @@ Functional Requirements
 6. A session must include a date & time, a title, and a description.
 
 Non-Functional Requirements
-1. Server-side code - Php.
-2. Front-end code - React.
+1. Front-end code - React. 
+2. Server-side code - Php.
+3. Database - MySQL
 
 For React App:
 1. Install NodeJS https://nodejs.org/en/
