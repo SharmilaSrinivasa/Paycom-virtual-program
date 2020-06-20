@@ -14,3 +14,14 @@ Functional Requirements
 Non-Functional Requirements
 1. Server-side code - Php.
 2. Front-end code - React.
+
+For React App:
+1. Install NodeJS https://nodejs.org/en/
+2. Install React using -> npm install -g create-react-app
+3. Create project using -> create-react-app projectname
+4. In terminal, cd projectname then start the server using -> npm start
+5. Install bootstrap framework for UI framework using -> npm install bootstrap --save
+6. Install vanilla bootstrap for customizing the sass file using -> npm install react-bootstrap bootstrap
+7. Install React router module to enable router service using -> npm install --save react-router-dom
+
+
