@@ -6,6 +6,7 @@ import Welcome from "./components/Welcome/Welcome";
 import Routes from "./routes";
 import "./styles/foundation.min.css";
 import "./styles/custom.css";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 class App extends Component {
   constructor(props) {
