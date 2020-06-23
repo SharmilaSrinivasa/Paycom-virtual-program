@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "./Login.css";
+import { PostData } from "../../services/PostData";
+import { Redirect } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -7,6 +9,7 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
+      redirectToReferrer: false,
     };
     this.login = this.login.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -14,6 +17,15 @@ class Login extends Component {
 
   login() {
     console.log("Login Function");
+    if (this.state.email && this.state.password) {
+      PostData("login", this.state).then((result) => {
+        let responseJson = result;
+        if (responseJson.userData) {
+          sessionStorage.setItem("userData", JSON.stringify(responseJson));
+          this.setState({ redirectToReferrer: true });
+        }
+      });
+    }
   }
 
   onChange(e) {
@@ -22,6 +34,10 @@ class Login extends Component {
   }
 
   render() {
+    if (this.state.redirectToReferrer || sessionStorage.getItem("userData")) {
+      return <Redirect to={"/home"} />;
+    }
+
     return (
       <div className="row">
         <div className="column bodypart">

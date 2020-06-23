@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "./Signup.css";
+import { PostData } from "../../services/PostData";
+import { Redirect } from "react-router-dom";
 
 class Signup extends Component {
   constructor(props) {
@@ -9,6 +11,7 @@ class Signup extends Component {
       lastname: "",
       email: "",
       password: "",
+      redirectToReferrer: false,
     };
     this.signup = this.signup.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -16,6 +19,20 @@ class Signup extends Component {
 
   signup() {
     console.log("signup Function");
+    if (
+      this.state.firstname &&
+      this.state.lastname &&
+      this.state.password &&
+      this.state.email
+    ) {
+      PostData("signup", this.state).then((result) => {
+        let responseJson = result;
+        if (responseJson.userData) {
+          sessionStorage.setItem("userData", JSON.stringify(responseJson));
+          this.setState({ redirectToReferrer: true });
+        }
+      });
+    }
   }
 
   onChange(e) {
@@ -24,6 +41,9 @@ class Signup extends Component {
   }
 
   render() {
+    if (this.state.redirectToReferrer || sessionStorage.getItem("userData")) {
+      return <Redirect to={"/home"} />;
+    }
     return (
       <div className="row">
         <div className="column bodypart">

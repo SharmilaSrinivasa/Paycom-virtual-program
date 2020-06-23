@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Header from "./components/Header/Header";
 import MobileHeader from "./components/MobileHeader/MobileHeader";
 import Footer from "./components/Footer/Footer";
-import Welcome from "./components/Welcome/Welcome";
 import Routes from "./routes";
 import "./styles/foundation.min.css";
 import "./styles/custom.css";

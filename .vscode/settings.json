@@ -1,0 +1,19 @@
+{
+    "sqltools.connections": [
+        {
+            "askForPassword": false,
+            "connectionTimeout": 60,
+            "database": "Planner",
+            "driver": "MySQL",
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "name": "MySQL",
+            "password": "siva1234",
+            "port": 3306,
+            "previewLimit": 50,
+            "server": "localhost",
+            "username": "sharmi"
+        }
+    ]
+}
