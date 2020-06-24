@@ -18,11 +18,12 @@ Non-Functional Requirements
 
 For Database:
 1. Download xampp and start MySQL and Apache services.
-2. Database named Planner created using phpmyadmin.
+2. Enable localhost over SSH.
+2. Create database using phpmyadmin in localhost.
 
 For Front end:
 1. Install NodeJS https://nodejs.org/en/
-2. Created folder inside the htdocs of xampp for the frontend code part.
+2. Create folder inside the htdocs of xampp for the frontend code part.
 3. Install React using -> npm install -g create-react-app
 4. Create project using -> create-react-app projectname
 5. In terminal, cd projectname then start the server using -> npm start
@@ -31,5 +32,5 @@ For Front end:
 8. Install React router module to enable router service using -> npm install --save react-router-dom
 
 For Server-side coding:
-1. Created folder inside htdocs of xampp for php code part.
+1. Create folder inside htdocs of xampp for php code part.
 
