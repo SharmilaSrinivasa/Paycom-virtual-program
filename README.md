@@ -16,13 +16,20 @@ Non-Functional Requirements
 2. Server-side code - Php.
 3. Database - MySQL
 
-For React App:
-1. Install NodeJS https://nodejs.org/en/
-2. Install React using -> npm install -g create-react-app
-3. Create project using -> create-react-app projectname
-4. In terminal, cd projectname then start the server using -> npm start
-5. Install bootstrap framework for UI framework using -> npm install bootstrap --save
-6. Install vanilla bootstrap for customizing the sass file using -> npm install react-bootstrap bootstrap
-7. Install React router module to enable router service using -> npm install --save react-router-dom
+For Database:
+1. Download xampp and start MySQL and Apache services.
+2. Database named Planner created using phpmyadmin.
 
+For Front end:
+1. Install NodeJS https://nodejs.org/en/
+2. Created folder inside the htdocs of xampp for the frontend code part.
+3. Install React using -> npm install -g create-react-app
+4. Create project using -> create-react-app projectname
+5. In terminal, cd projectname then start the server using -> npm start
+6. Install bootstrap framework for UI framework using -> npm install bootstrap --save
+7. Install vanilla bootstrap for customizing the sass file using -> npm install react-bootstrap bootstrap
+8. Install React router module to enable router service using -> npm install --save react-router-dom
+
+For Server-side coding:
+1. Created folder inside htdocs of xampp for php code part.
 
