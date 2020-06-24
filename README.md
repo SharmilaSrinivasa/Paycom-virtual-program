@@ -21,7 +21,7 @@ For Database:
 2. Enable localhost over SSH.
 2. Create database using phpmyadmin in localhost.
 
-For Front end:
+For Client Side:
 1. Install NodeJS https://nodejs.org/en/
 2. Create folder inside the htdocs of xampp for the frontend code part.
 3. Install React using -> npm install -g create-react-app
