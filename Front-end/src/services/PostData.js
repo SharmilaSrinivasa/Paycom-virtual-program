@@ -1,5 +1,5 @@
 export function PostData(type, userData) {
-  let BaseURL = "http://localhost/PHP-Slim-Restful/api/";
+  let BaseURL = "http://localhost/react-php/api/index.php";
 
   return new Promise((resolve, reject) => {
     fetch(BaseURL + type, {
