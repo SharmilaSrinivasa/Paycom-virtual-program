@@ -1,59 +1,49 @@
 import React, { Component } from "react";
+//import { Redirect } from "react-router-dom";
+import axios from "axios";
 import "./Home.css";
-import { Redirect } from "react-router-dom";
+import RecordsList from "./RecordsList";
 
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      redirectToReferrer: false,
-    };
-    this.logout = this.logout.bind(this);
+    this.state = { events: [] };
   }
 
-  componentWillMount() {
-    if (sessionStorage.getItem("userData")) {
-      console.log("home feed");
-    } else {
-      this.setState({ redirectToReferrer: true });
-    }
+  componentDidMount() {
+    axios
+      .get("http://localhost:8080/react-php/api/view.php")
+      .then((response) => {
+        this.setState({ events: response.data });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
-  logout() {
-    sessionStorage.setItem("userData", "");
-    sessionStorage.clear();
-    this.setState({ redirectToReferrer: true });
+  eventsList() {
+    return this.state.events.map(function (object, i) {
+      return <RecordsList obj={object} key={i} />;
+    });
   }
 
   render() {
-    if (this.state.redirectToReferrer) {
-      return <Redirect to={"/login"} />;
-    }
-
     return (
-      <div className="row">
-        <div className="column bodypart">
-          <div className="rightshift">
-            <a href="/" onClick={this.logout} className="button">
-              Logout
-            </a>
-          </div>
-          <table className="searchclass">
+      <div>
+        <h3 align="center"> Events List</h3>
+        <table className="table table-striped" style={{ marginTop: 20 }}>
+          <thead>
             <tr>
-              <td>
-                <a href="/createevent" className="button">
-                  Create Event
-                </a>
-              </td>
-              <td>
-                <input type="text" name="event" placeholder="Event Title" />
-              </td>
-              <td>
-                <input type="submit" value="Search" className="button" />
-              </td>
+              <th>Title</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Location</th>
+              <th>Description</th>
+              <th colSpan="2">Action</th>
             </tr>
-          </table>
-        </div>
+          </thead>
+          <tbody>{this.eventsList()}</tbody>
+        </table>
       </div>
     );
   }
