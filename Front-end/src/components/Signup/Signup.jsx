@@ -1,111 +1,133 @@
 import React, { Component } from "react";
-import "./Signup.css";
-import { PostData } from "../../services/PostData";
 import { Redirect } from "react-router-dom";
+import { Form, Button } from "react-bootstrap";
+import axios from "axios";
+import "./Signup.css";
 
 class Signup extends Component {
   constructor(props) {
     super(props);
+    this.onChangeFirstName = this.onChangeFirstName.bind(this);
+    this.onChangeLastName = this.onChangeLastName.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+
     this.state = {
       firstname: "",
       lastname: "",
       email: "",
       password: "",
-      redirectToReferrer: false,
+      redirect: false,
     };
-    this.signup = this.signup.bind(this);
-    this.onChange = this.onChange.bind(this);
   }
 
-  signup() {
-    console.log("signup Function");
-    if (
-      this.state.firstname &&
-      this.state.lastname &&
-      this.state.password &&
-      this.state.email
-    ) {
-      PostData("signup", this.state).then((result) => {
-        let responseJson = result;
-        if (responseJson.userData) {
-          sessionStorage.setItem("userData", JSON.stringify(responseJson));
-          this.setState({ redirectToReferrer: true });
+  onChangeFirstName(e) {
+    this.setState({
+      firstname: e.target.value,
+    });
+  }
+
+  onChangeLastName(e) {
+    this.setState({
+      lastname: e.target.value,
+    });
+  }
+
+  onChangeEmail(e) {
+    this.setState({
+      email: e.target.value,
+    });
+  }
+
+  onChangePassword(e) {
+    this.setState({
+      password: e.target.value,
+    });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    const obj = {
+      firstname: this.state.firstname,
+      lastname: this.state.lastname,
+      email: this.state.email,
+      password: this.state.password,
+    };
+    //console.log(obj);
+
+    axios
+      .post("http://localhost:8080/react-php/api/signup.php", obj)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.status === "created") {
+          this.props.handleSuccessfulAuth(res.data);
+          this.setState({ redirect: true });
         }
+      })
+      .catch((error) => {
+        console.log("registration error", error);
       });
-    }
-  }
-
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state);
   }
 
   render() {
-    if (this.state.redirectToReferrer || sessionStorage.getItem("userData")) {
-      return <Redirect to={"/home"} />;
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to="/home" />;
     }
     return (
       <div className="row">
         <div className="column bodypart">
-          <form>
-            <p className="forgot-password text-right">
+          <Form onSubmit={this.onSubmit}>
+            <p className="text-right">
               Already have an account? <a href="/login">Login</a>
             </p>
             <h3>Sign Up</h3>
 
-            <div className="form-group">
-              <label>First name</label>
-              <input
+            <Form.Group controlId="formBasicFirstName">
+              <Form.Label>First name</Form.Label>
+              <Form.Control
                 type="text"
-                name="firstname"
-                className="form-control"
-                placeholder="First name"
-                onChange={this.onChange}
+                placeholder="Enter First name"
+                value={this.state.firstname}
+                onChange={this.onChangeFirstName}
               />
-            </div>
+            </Form.Group>
 
-            <div className="form-group">
-              <label>Last name</label>
-              <input
+            <Form.Group controlId="formBasicLastName">
+              <Form.Label>Last name</Form.Label>
+              <Form.Control
                 type="text"
-                name="lastname"
-                className="form-control"
-                placeholder="Last name"
-                onChange={this.onChange}
+                placeholder="Enter Last name"
+                value={this.state.lastname}
+                onChange={this.onChangeLastName}
               />
-            </div>
+            </Form.Group>
 
-            <div className="form-group">
-              <label>Email address</label>
-              <input
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
                 type="email"
-                name="email"
-                className="form-control"
                 placeholder="Enter email"
-                onChange={this.onChange}
+                value={this.state.email}
+                onChange={this.onChangeEmail}
               />
-            </div>
+            </Form.Group>
 
-            <div className="form-group">
-              <label>Password</label>
-              <input
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
                 type="password"
-                name="password"
-                className="form-control"
-                placeholder="Enter password"
-                onChange={this.onChange}
+                placeholder="Password"
+                value={this.state.password}
+                onChange={this.onChangePassword}
               />
-            </div>
+            </Form.Group>
 
-            <button
-              type="submit"
-              value="Signup"
-              className="btn btn-primary btn-block"
-              onClick={this.signup}
-            >
-              Sign Up
-            </button>
-          </form>
+            <Button variant="primary" type="submit">
+              Sign up
+            </Button>
+          </Form>
         </div>
       </div>
     );

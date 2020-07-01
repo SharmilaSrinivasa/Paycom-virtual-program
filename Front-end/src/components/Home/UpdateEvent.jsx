@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Form, Button, Col } from "react-bootstrap";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
-class CreateEvent extends Component {
+class UpdateEvent extends Component {
   constructor(props) {
     super(props);
     this.onChangeEventTitle = this.onChangeEventTitle.bind(this);
@@ -18,7 +19,29 @@ class CreateEvent extends Component {
       event_time: "",
       location: "",
       description: "",
+      redirect: false,
     };
+  }
+
+  componentDidMount() {
+    console.log("mounted", this.props.params);
+    axios
+      .get(
+        "http://localhost:8080/react-php/api/getById.php?id=" +
+          this.props.match.params.id
+      )
+      .then((response) => {
+        this.setState({
+          event_title: response.data.title,
+          event_date: response.data.event_date,
+          event_time: response.data.event_time,
+          location: response.data.location,
+          description: response.data.description,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   onChangeEventTitle(e) {
@@ -60,34 +83,35 @@ class CreateEvent extends Component {
       location: this.state.location,
       description: this.state.description,
     };
-    console.log(obj);
-
     axios
-      .post("http://localhost:8080/react-php/api/insert.php", obj)
+      .post(
+        "http://localhost:8080/react-php/api/update.php?id=" +
+          this.props.match.params.id,
+        obj
+      )
+      // .then((res) => console.log(res.data), this.setState({ redirect: true }));
       .then((res) => {
-        console.log(res.data);
+        if (res.status) {
+          this.setState({ redirect: true });
+        }
       });
-
-    this.setState({
-      event_title: "",
-      event_date: "",
-      event_time: "",
-      location: "",
-      description: "",
-    });
   }
+
   render() {
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to="/home" />;
+    }
     return (
       <div className="row">
         <div className="column bodypart">
-          <h1>Create Event</h1>
+          <h1>Update Event</h1>
           <Form onSubmit={this.onSubmit}>
             <Form.Row>
               <Form.Group as={Col} controlId="formGridEvent">
                 <Form.Label>Event Title</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter event title"
                   value={this.state.event_title}
                   onChange={this.onChangeEventTitle}
                 />
@@ -119,7 +143,6 @@ class CreateEvent extends Component {
                 <Form.Label>Location</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter location"
                   value={this.state.location}
                   onChange={this.onChangeLocation}
                 />
@@ -137,7 +160,7 @@ class CreateEvent extends Component {
             </Form.Group>
 
             <Button variant="primary" type="submit">
-              Submit
+              Update
             </Button>
           </Form>
         </div>
@@ -145,4 +168,5 @@ class CreateEvent extends Component {
     );
   }
 }
-export default CreateEvent;
+
+export default UpdateEvent;

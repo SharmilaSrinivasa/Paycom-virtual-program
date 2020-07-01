@@ -1,7 +1,32 @@
 import React, { Component } from "react";
+import axios from "axios";
+import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class RecordList extends Component {
+  constructor(props) {
+    super(props);
+    this.delete = this.delete.bind(this);
+    this.state = {
+      redirect: false,
+    };
+  }
+
+  delete() {
+    //console.log("test: " + this.props.obj.eventId);
+    axios
+      .get(
+        "http://localhost:8080/react-php/api/delete.php?id=" +
+          this.props.obj.eventId
+      )
+      .then(this.setState({ redirect: true }))
+      .catch((err) => console.log(err));
+  }
   render() {
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to="/home" />;
+    }
     return (
       <tr>
         <td>{this.props.obj.title}</td>
@@ -10,10 +35,17 @@ class RecordList extends Component {
         <td>{this.props.obj.location}</td>
         <td>{this.props.obj.description}</td>
         <td>
-          <button className="btn btn-primary">Edit</button>
+          <Link
+            to={"/updateevent/" + this.props.obj.eventId}
+            className="btn btn-primary"
+          >
+            Edit
+          </Link>
         </td>
         <td>
-          <button className="btn btn-primary">Delete</button>
+          <button onClick={this.delete} className="btn btn-danger">
+            Delete
+          </button>
         </td>
       </tr>
     );

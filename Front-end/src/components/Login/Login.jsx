@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import "./Login.css";
 import { PostData } from "../../services/PostData";
 import { Redirect } from "react-router-dom";
+import "./Login.css";
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
+  /* constructor() {
+    super();
     this.state = {
       email: "",
       password: "",
@@ -23,6 +23,8 @@ class Login extends Component {
         if (responseJson.userData) {
           sessionStorage.setItem("userData", JSON.stringify(responseJson));
           this.setState({ redirectToReferrer: true });
+        } else {
+          alert(result.error);
         }
       });
     }
@@ -30,11 +32,14 @@ class Login extends Component {
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state);
+    //console.log(this.state);
   }
 
   render() {
-    if (this.state.redirectToReferrer || sessionStorage.getItem("userData")) {
+    if (this.state.redirectToReferrer) {
+      return <Redirect to={"/home"} />;
+    }
+    if (sessionStorage.getItem("userData")) {
       return <Redirect to={"/home"} />;
     }
 
@@ -84,6 +89,6 @@ class Login extends Component {
         </div>
       </div>
     );
-  }
+  } */
 }
 export default Login;
