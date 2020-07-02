@@ -21,7 +21,7 @@ For Database:
 2. Enable localhost over SSH.
 2. Create database using phpmyadmin in localhost.
 
-For Client Side:
+For Client Side: 
 1. Install NodeJS https://nodejs.org/en/
 2. Create folder inside the htdocs of xampp for the frontend code part.
 3. Install React using -> npm install -g create-react-app
@@ -30,7 +30,9 @@ For Client Side:
 6. Install bootstrap framework for UI framework using -> npm install bootstrap --save
 7. Install vanilla bootstrap for customizing the sass file using -> npm install react-bootstrap bootstrap
 8. Install React router module to enable router service using -> npm install --save react-router-dom
+9. For users authentication & authorization using Axios to send API calls and handle JWT tokens.
 
 For Server-side coding:
 1. Create folder inside htdocs of xampp for php code part.
+2. Building the PHP application that implements the JWT-protected REST API.
 
