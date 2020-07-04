@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import logo from "../../images/Paycom-Generic.png";
 import "./Welcome.css";
 
 class Welcome extends Component {
@@ -17,7 +18,7 @@ class Welcome extends Component {
           </a>
         </div>
         <div className="medium-6 columns">
-          <img className="thumbnail" src="https://placehold.it/550x550" />
+          <img className="thumbnail" src={logo} alt="Planner" />
         </div>
       </div>
     );

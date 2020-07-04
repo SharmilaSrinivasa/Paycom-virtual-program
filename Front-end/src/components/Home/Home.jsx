@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./Home.css";
 import RecordsList from "./RecordsList";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
 
 class Home extends Component {
   constructor(props) {
@@ -30,6 +32,13 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <Navbar bg="light" expand="lg">
+          <Navbar.Brand>Home</Navbar.Brand>
+          <Navbar.Collapse className="justify-content-end">
+            <Nav.Link href="/createevent">Create</Nav.Link>
+            <Nav.Link href="/">Logout</Nav.Link>
+          </Navbar.Collapse>
+        </Navbar>
         <h3 align="center"> Events List</h3>
         <table className="table table-striped" style={{ marginTop: 20 }}>
           <thead>
@@ -39,6 +48,7 @@ class Home extends Component {
               <th>Time</th>
               <th>Location</th>
               <th>Description</th>
+              <th>Attendees</th>
               <th colSpan="2">Action</th>
             </tr>
           </thead>

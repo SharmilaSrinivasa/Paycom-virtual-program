@@ -34,6 +34,7 @@ class RecordList extends Component {
         <td>{this.props.obj.event_time}</td>
         <td>{this.props.obj.location}</td>
         <td>{this.props.obj.description}</td>
+        <td></td>
         <td>
           <Link
             to={"/updateevent/" + this.props.obj.eventId}

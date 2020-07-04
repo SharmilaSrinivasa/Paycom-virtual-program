@@ -1,36 +1,28 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
-import axios from "axios";
+import { signup } from "../../utils/JWTAuth.js";
 import "./Signup.css";
 
 class Signup extends Component {
   constructor(props) {
     super(props);
-    this.onChangeFirstName = this.onChangeFirstName.bind(this);
-    this.onChangeLastName = this.onChangeLastName.bind(this);
+    this.onChangeRole = this.onChangeRole.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      firstname: "",
-      lastname: "",
+      role: "",
       email: "",
       password: "",
       redirect: false,
     };
   }
 
-  onChangeFirstName(e) {
+  onChangeRole(e) {
     this.setState({
-      firstname: e.target.value,
-    });
-  }
-
-  onChangeLastName(e) {
-    this.setState({
-      lastname: e.target.value,
+      role: e.target.value,
     });
   }
 
@@ -46,88 +38,85 @@ class Signup extends Component {
     });
   }
 
-  onSubmit(e) {
+  async onSubmit(e) {
     e.preventDefault();
     const obj = {
-      firstname: this.state.firstname,
-      lastname: this.state.lastname,
+      role: this.state.role,
       email: this.state.email,
       password: this.state.password,
     };
-    //console.log(obj);
 
-    axios
-      .post("http://localhost:8080/react-php/api/signup.php", obj)
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.status === "created") {
-          this.props.handleSuccessfulAuth(res.data);
-          this.setState({ redirect: true });
-        }
-      })
-      .catch((error) => {
-        console.log("registration error", error);
-      });
+    let obj1 = await signup(obj);
+    console.log("test: ", obj1);
+    if (obj1 !== 0) {
+      this.setState({ redirect: true });
+      var arr = obj1.split(",");
+      var arr1 = JSON.parse(arr);
+      this.setState({ role: arr1.role });
+      this.setState({ email: arr1.email });
+      console.log("prop2:", this.props);
+      //console.log("obj1: ", arr1.role);
+    } else {
+      alert("Email exists");
+    }
   }
 
   render() {
-    const { redirect } = this.state;
-    if (redirect) {
+    let redirect = this.state.redirect;
+    let role = this.state.role;
+    let email = this.state.email;
+    if (redirect && role === "Admin") {
       return <Redirect to="/home" />;
+    } else if (redirect && role === "User") {
+      return <Redirect to={"/dashboard/" + email} />;
     }
     return (
-      <div className="row">
-        <div className="column bodypart">
-          <Form onSubmit={this.onSubmit}>
-            <p className="text-right">
-              Already have an account? <a href="/login">Login</a>
-            </p>
-            <h3>Sign Up</h3>
+      <div className="container">
+        <div className="col-xs-8">
+          <div className="card">
+            <div className="card-body">
+              <Form onSubmit={this.onSubmit}>
+                <p className="text-right">
+                  Already have an account? <a href="/login">Login</a>
+                </p>
+                <h3 className="card-title">Sign Up</h3>
 
-            <Form.Group controlId="formBasicFirstName">
-              <Form.Label>First name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter First name"
-                value={this.state.firstname}
-                onChange={this.onChangeFirstName}
-              />
-            </Form.Group>
+                <Form.Group controlId="formBasicRole">
+                  <Form.Label>Role</Form.Label>
+                  <Form.Control
+                    type="tex"
+                    placeholder="Admin/User"
+                    value={this.state.role}
+                    onChange={this.onChangeRole}
+                  />
+                </Form.Group>
 
-            <Form.Group controlId="formBasicLastName">
-              <Form.Label>Last name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter Last name"
-                value={this.state.lastname}
-                onChange={this.onChangeLastName}
-              />
-            </Form.Group>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Email address</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter email"
+                    value={this.state.email}
+                    onChange={this.onChangeEmail}
+                  />
+                </Form.Group>
 
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter email"
-                value={this.state.email}
-                onChange={this.onChangeEmail}
-              />
-            </Form.Group>
+                <Form.Group controlId="formBasicPassword">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Password"
+                    value={this.state.password}
+                    onChange={this.onChangePassword}
+                  />
+                </Form.Group>
 
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Password"
-                value={this.state.password}
-                onChange={this.onChangePassword}
-              />
-            </Form.Group>
-
-            <Button variant="primary" type="submit">
-              Sign up
-            </Button>
-          </Form>
+                <Button variant="primary" type="submit">
+                  Sign up
+                </Button>
+              </Form>
+            </div>
+          </div>
         </div>
       </div>
     );

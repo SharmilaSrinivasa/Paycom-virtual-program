@@ -18,7 +18,7 @@ const Routes = () => (
       <Route path="/login" component={Login} />
       <Route path="/forgotpassword" component={ForgotPassword} />
       <Route path="/signup" component={Signup} />
-      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/dashboard/:id" component={Dashboard} />
       <Route path="/home" component={Home} />
       <Route path="/createevent" component={CreateEvent} />
       <Route path="/updateevent/:id" component={UpdateEvent} />
