@@ -1,31 +1,41 @@
 import React, { Component } from "react";
 //import { Redirect } from "react-router-dom";
 import axios from "axios";
-import "./Dashboard.css";
+import "./RegisteredEvents.css";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
 
-class Dashboard extends Component {
+class RegisteredEvents extends Component {
   constructor(props) {
     super(props);
-    this.state = { events: [] };
+    this.state = { eventsDetails: [] };
   }
 
   componentDidMount() {
     axios
-      .get("http://localhost:8080/react-php/api/view.php")
+      .get(
+        "http://localhost:8080/react-php/api/getEventsById.php?userEmail=" +
+          this.props.match.params.id
+      )
       .then((response) => {
-        this.setState({ events: response.data });
-        console.log("this.state.events: ", this.state.events);
+        this.setState({ eventsDetails: response.data });
+
+        console.log("sharmi: ", this.state.eventsDetails);
       })
       .catch(function (error) {
         console.log(error);
       });
   }
-
   renderTableData() {
-    return this.state.events.map((events, index) => {
+    if (
+      this.state.eventsDetails.length === 0 ||
+      this.state.eventsDetails === "0 results"
+    ) {
+      console.log("0 record");
+      return;
+    }
+    return this.state.eventsDetails.map((eventsDetails, index) => {
       const {
         eventId,
         title,
@@ -33,7 +43,7 @@ class Dashboard extends Component {
         event_time,
         location,
         description,
-      } = events;
+      } = eventsDetails;
       return (
         <tr key={eventId}>
           <td>{title}</td>
@@ -41,41 +51,19 @@ class Dashboard extends Component {
           <td>{event_time}</td>
           <td>{location}</td>
           <td>{description}</td>
-          <td>
-            <button
-              onClick={() => this.register(eventId)}
-              className="btn btn-primary"
-            >
-              Register
-            </button>
-          </td>
         </tr>
       );
     });
   }
 
-  register(eventId) {
-    //console.log("e:", eventId);
-    let obj = { user_email: this.props.match.params.emailId };
-    axios
-      .post(
-        "http://localhost:8080/react-php/api/registerEvent.php?eventId=" +
-          eventId,
-        obj
-      )
-      .catch((err) => console.log(err));
-  }
-
   render() {
-    let user_email = this.props.match.params.emailId;
-
     return (
       <div>
         <Navbar bg="light" expand="lg">
-          <Navbar.Brand>Dashboard</Navbar.Brand>
+          <Navbar.Brand>Registered Events</Navbar.Brand>
           <Navbar.Collapse className="justify-content-end">
-            <Link to={"/registeredevents/" + user_email}>
-              Registered Events
+            <Link to={"/dashboard/" + this.props.match.params.id}>
+              Dashboard
             </Link>
             <Nav.Link href="/">Logout</Nav.Link>
           </Navbar.Collapse>
@@ -89,7 +77,6 @@ class Dashboard extends Component {
               <th>Time</th>
               <th>Location</th>
               <th>Description</th>
-              <th>Action</th>
             </tr>
           </thead>
           <tbody>{this.renderTableData()}</tbody>
@@ -98,4 +85,4 @@ class Dashboard extends Component {
     );
   }
 }
-export default Dashboard;
+export default RegisteredEvents;

@@ -11,13 +11,10 @@ error_reporting(E_ERROR);
 $events = [];
 $sql = "SELECT * FROM events";
 
-if($result = mysqli_query($conn, $sql))
-{
-    if ($result->num_rows > 0)
-    {
+if ($result = mysqli_query($conn, $sql)) {
+    if ($result->num_rows > 0) {
         $cr = 0;
-        while($row = mysqli_fetch_assoc($result))
-        {
+        while ($row = mysqli_fetch_assoc($result)) {
             $events[$cr]['eventId'] = $row['eventId'];
             $events[$cr]['title'] = $row['title'];
             $events[$cr]['location'] = $row['location'];
@@ -27,16 +24,10 @@ if($result = mysqli_query($conn, $sql))
             $cr++;
         }
 
-        print_r($evnets);
         echo json_encode($events);
-    }
-    else{
+    } else {
         echo "0 results";
     }
-}
-else{
+} else {
     http_response_code(404);
 }
-
-?>
-

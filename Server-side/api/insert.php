@@ -7,11 +7,9 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-
 $postdata = file_get_contents("php://input");
 
-if(isset($postdata) && !empty($postdata))
-{
+if (isset($postdata) && !empty($postdata)) {
     $request = json_decode($postdata);
     print_r($request);
 
@@ -25,15 +23,11 @@ if(isset($postdata) && !empty($postdata))
     $sql = "INSERT INTO events (title, event_date, event_time, location, description)
     VALUES ( '{$event_title}', '{$event_date}', '{$event_time}', '{$location}', '{$description}')";
 
-    if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
-    } 
-    else 
-    {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    if ($conn->query($sql) === true) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
 
     $conn->close();
 }
-?> 
-

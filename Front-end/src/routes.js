@@ -10,6 +10,7 @@ import NotFound from "./components/NotFound/NotFound";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import CreateEvent from "./components/CreateEvent/CreateEvent";
 import UpdateEvent from "./components/Home/UpdateEvent";
+import RegisteredEvents from "./components/RegisteredEvents/RegisteredEvents";
 
 const Routes = () => (
   <BrowserRouter>
@@ -18,7 +19,8 @@ const Routes = () => (
       <Route path="/login" component={Login} />
       <Route path="/forgotpassword" component={ForgotPassword} />
       <Route path="/signup" component={Signup} />
-      <Route path="/dashboard/:id" component={Dashboard} />
+      <Route path="/dashboard/:emailId" component={Dashboard} />
+      <Route path="/registeredevents/:id" component={RegisteredEvents} />
       <Route path="/home" component={Home} />
       <Route path="/createevent" component={CreateEvent} />
       <Route path="/updateevent/:id" component={UpdateEvent} />

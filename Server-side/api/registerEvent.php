@@ -8,33 +8,26 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 $postdata = file_get_contents("php://input");
- 
-//print_r($postdata);
 
-if(isset($postdata) && !empty($postdata))
-{
+print_r($postdata);
+
+if (isset($postdata) && !empty($postdata)) {
     //Extract the data.
     $request = json_decode($postdata);
 
-    print_r($request);
+    //print_r($request);
 
     //Sanitize.
-    $event_id = $_GET['myparam1'];
-    $user_id = $request->user_id;
+    $event_id = $_GET['eventId'];
+    $user_email = $request->user_email;
 
-    $sql = "INSERT INTO AttendeeList (eventId, userId) VALUES ( '{$event_id}', '{$user_id}')";
+    $sql = "INSERT INTO AttendeeList (eventId, userEmail) VALUES ( '{$event_id}', '{$user_email}')";
 
-    if ($conn->query($sql) === TRUE) {
+    if ($conn->query($sql) === true) {
         echo "New record created successfully";
-    } 
-    else 
-    {
+    } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
 }
 
 $conn->close();
-
-
-
-?> 

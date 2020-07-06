@@ -7,14 +7,12 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-
 // Get the posted data.
 $postdata = file_get_contents("php://input");
- 
+
 //print_r($postdata);
 
-if(isset($postdata) && !empty($postdata))
-{
+if (isset($postdata) && !empty($postdata)) {
     //Extract the data.
     $request = json_decode($postdata);
 
@@ -29,15 +27,13 @@ if(isset($postdata) && !empty($postdata))
     $description = $request->description;
 
     //update
-    $sql = "UPDATE events SET title = '$title', event_date = '$event_date', 
-    event_time = '$event_time', location = '$location', description = '$description' 
+    $sql = "UPDATE events SET title = '$title', event_date = '$event_date',
+    event_time = '$event_time', location = '$location', description = '$description'
     WHERE eventId = '{$id}' LIMIT 1";
 
-    if(mysqli_query($conn, $sql))
-    {
+    if (mysqli_query($conn, $sql)) {
         http_response_code(204);
-    }
-    else{
+    } else {
         return http_response_code(422);
     }
 

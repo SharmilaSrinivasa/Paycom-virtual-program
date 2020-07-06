@@ -7,10 +7,10 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-$id=$_GET['id'];
+$emailId = $_GET['emailId'];
 
-$sql = "SELECT * FROM Users 
-WHERE email = '{$id}' LIMIT 1";
+$sql = "SELECT * FROM Users
+WHERE email = '{$emailId}' LIMIT 1";
 
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
@@ -20,5 +20,3 @@ echo $json = json_encode($row);
 //echo json_encode(['data'=>$json]);
 
 $conn->close();
-
-?> 

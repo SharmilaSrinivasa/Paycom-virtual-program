@@ -11,8 +11,7 @@ $postdata = file_get_contents("php://input");
 
 $errors = array();
 
-if(isset($postdata) && !empty($postdata))
-{
+if (isset($postdata) && !empty($postdata)) {
     $request = json_decode($postdata);
     print_r($request);
 
@@ -25,37 +24,27 @@ if(isset($postdata) && !empty($postdata))
     $result = mysqli_query($conn, $check_query);
     $user = mysqli_fetch_assoc($result);
 
-    if ($user) 
-    {
-        if ($user['email'] === $email) 
-        {
+    if ($user) {
+        if ($user['email'] === $email) {
             array_push($errors, "email already exists");
         }
     }
-    
-    if(count($errors) == 0)
-    {
+
+    if (count($errors) == 0) {
         $password = md5($password);
-        $sql = "INSERT INTO Users (role, email, password) 
-        VALUES ('{$role}', '{$email}', '{$password}')"; 
-        if ($conn->query($sql) === TRUE) 
-        {
+        $sql = "INSERT INTO Users (role, email, password)
+        VALUES ('{$role}', '{$email}', '{$password}')";
+        if ($conn->query($sql) === true) {
             http_response_code(200);
             echo json_encode(array("message" => "User was successfully registered."));
-        } 
-        else 
-        {
+        } else {
             http_response_code(400);
             echo "Error: " . $sql . "<br>" . $conn->error;
-        }  
-    }
-    else
-    {
+        }
+    } else {
         http_response_code(400);
         echo json_encode(array("error" => "email exists", "email" => $email));
     }
- 
- 
+
     $conn->close();
 }
-?> 
