@@ -24,6 +24,7 @@ class RecordList extends Component {
   }
   render() {
     const { redirect } = this.state;
+    //console.log("val: ", redirect);
     if (redirect) {
       return <Redirect to="/home" />;
     }
@@ -34,7 +35,7 @@ class RecordList extends Component {
         <td>{this.props.obj.event_time}</td>
         <td>{this.props.obj.location}</td>
         <td>{this.props.obj.description}</td>
-        <td></td>
+        <td>{this.props.obj.RSVP}</td>
         <td>
           <Link
             to={"/updateevent/" + this.props.obj.eventId}

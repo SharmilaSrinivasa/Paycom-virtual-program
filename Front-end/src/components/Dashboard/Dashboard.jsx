@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-//import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 import "./Dashboard.css";
 import Navbar from "react-bootstrap/Navbar";
@@ -9,15 +9,21 @@ import { Link } from "react-router-dom";
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = { events: [] };
+    this.register = this.register.bind(this);
+    this.state = {
+      events: [],
+      redirect: false,
+    };
   }
 
   componentDidMount() {
     axios
-      .get("http://localhost:8080/react-php/api/view.php")
+      .get(
+        "http://localhost:8080/react-php/api/unregistered.php?userEmail=" +
+          this.props.match.params.emailId
+      )
       .then((response) => {
         this.setState({ events: response.data });
-        console.log("this.state.events: ", this.state.events);
       })
       .catch(function (error) {
         console.log(error);
@@ -25,6 +31,9 @@ class Dashboard extends Component {
   }
 
   renderTableData() {
+    if (this.state.events.length === 0 || this.state.events === "0 results") {
+      return;
+    }
     return this.state.events.map((events, index) => {
       const {
         eventId,
@@ -55,7 +64,7 @@ class Dashboard extends Component {
   }
 
   register(eventId) {
-    //console.log("e:", eventId);
+    console.log(this.state);
     let obj = { user_email: this.props.match.params.emailId };
     axios
       .post(
@@ -63,11 +72,18 @@ class Dashboard extends Component {
           eventId,
         obj
       )
+      .then(this.setState({ redirect: true }), alert("Registered Successfully"))
       .catch((err) => console.log(err));
   }
 
   render() {
     let user_email = this.props.match.params.emailId;
+    const { redirect } = this.state.redirect;
+    console.log("this.state.redirect: ", redirect);
+    if (redirect) {
+      console.log("inside: ", redirect);
+      return <Redirect to={"/dashboard/" + user_email} />;
+    }
 
     return (
       <div>

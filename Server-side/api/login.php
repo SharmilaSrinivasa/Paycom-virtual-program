@@ -1,4 +1,7 @@
 <?php
+require 'connect.php';
+require "../vendor/autoload.php";
+use \Firebase\JWT\JWT;
 
 header("Access-Control-Allow-Origin: * ");
 header("Content-Type: application/json; charset=UTF-8");
@@ -6,13 +9,8 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-require 'connect.php';
-require "../vendor/autoload.php";
-use \Firebase\JWT\JWT;
-
-
 $postdata = file_get_contents("php://input"); 
-
+$errors = array();
 if(isset($postdata) && !empty($postdata))
 {
     $request = json_decode($postdata);
@@ -23,16 +21,27 @@ if(isset($postdata) && !empty($postdata))
     $query = "SELECT * FROM Users 
     WHERE email = '$email'"; 
 
-    $result = $db->query($query);
+    $result = mysqli_query($conn, $sql);
     $rowCount = $result->num_rows;
-                
+          
     if($rowCount > 0)
     {
         $userData = $result->fetch_object();
         $user_id = $userData->user_id;
         $password2 = $userData->password;
 
-        if(password_verify($password, $password2))
+        if($password === $password2)
+        {
+            http_response_code(200);
+        }
+        else
+        {
+
+            http_response_code(401);
+            echo json_encode(array("message" => "Login failed.", "password" => $password));
+        }
+
+       /* if(password_verify($password, $password2))
         {
             $secret_key = "YOUR_SECRET_KEY";
             $issuer_claim = "THE_ISSUER"; // this can be the servername
@@ -68,7 +77,7 @@ if(isset($postdata) && !empty($postdata))
 
             http_response_code(401);
             echo json_encode(array("message" => "Login failed.", "password" => $password));
-        }
+        }*/
 
 }
 

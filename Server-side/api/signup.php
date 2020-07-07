@@ -13,7 +13,7 @@ $errors = array();
 
 if (isset($postdata) && !empty($postdata)) {
     $request = json_decode($postdata);
-    print_r($request);
+    //print_r($request);
 
     // Sanitize
     $role = $request->role;

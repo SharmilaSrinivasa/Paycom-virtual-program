@@ -47,11 +47,11 @@ class Login extends Component {
     };
     console.log(obj);
     let obj1 = await login(obj);
-    this.setState({ redirect: true });
-    var arr = obj1.split(",");
-    var arr1 = JSON.parse(arr);
-    this.setState({ role: arr1.role });
-    console.log("obj1: ", arr1.role);
+    //  this.setState({ redirect: true });
+    // var arr = obj1.split(",");
+    //  var arr1 = JSON.parse(arr);
+    // this.setState({ role: arr1.role });
+    console.log("obj1: ", obj1);
   }
 
   render() {
