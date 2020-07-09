@@ -45,16 +45,15 @@ class Signup extends Component {
       email: this.state.email,
       password: this.state.password,
     };
-
     let obj1 = await signup(obj);
-    console.log("test: ", obj1);
+    //console.log("test: ", obj1);
     if (obj1 !== 0) {
       this.setState({ redirect: true });
       var arr = obj1.split(",");
       var arr1 = JSON.parse(arr);
       this.setState({ role: arr1.role });
       this.setState({ email: arr1.email });
-      console.log("prop2:", this.props);
+      //console.log("prop2:", this.props);
       //console.log("obj1: ", arr1.role);
     } else {
       alert("Email exists");

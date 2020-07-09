@@ -17,6 +17,7 @@ class Login extends Component {
       email: "",
       password: "",
       redirect: false,
+      errorMessage: "",
     };
   }
 
@@ -45,22 +46,30 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password,
     };
-    console.log(obj);
+    // console.log(obj);
     let obj1 = await login(obj);
-    //  this.setState({ redirect: true });
-    // var arr = obj1.split(",");
-    //  var arr1 = JSON.parse(arr);
-    // this.setState({ role: arr1.role });
-    console.log("obj1: ", obj1);
+    //console.log("response from authjs:", obj1);
+    if (obj1 === undefined) {
+      alert("Login error, check your email and password");
+      //console.log("Login failed");
+    } else {
+      this.setState({ redirect: true });
+      var arr = obj1.split(",");
+      var arr1 = JSON.parse(arr);
+      this.setState({ role: arr1.role });
+      this.setState({ email: arr1.email });
+      //console.log("obj1: ", obj1);
+    }
   }
 
   render() {
     let redirect = this.state.redirect;
     let role = this.state.role;
+    let email = this.state.email;
     if (redirect && role === "Admin") {
       return <Redirect to="/home" />;
     } else if (redirect && role === "User") {
-      return <Redirect to="/dashboard" />;
+      return <Redirect to={"/dashboard/" + email} />;
     }
     return (
       <div className="container">

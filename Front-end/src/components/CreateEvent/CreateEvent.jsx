@@ -67,7 +67,15 @@ class CreateEvent extends Component {
     axios
       .post("http://localhost:8080/react-php/api/insert.php", obj)
       .then((res) => {
-        console.log(res.data);
+        console.log(res.status);
+        if (res.status === 200) {
+          console.log("event created successfully");
+          alert("event created successfully!");
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert("Date and time already exists!");
       });
 
     this.setState({
@@ -78,6 +86,7 @@ class CreateEvent extends Component {
       description: "",
     });
   }
+
   render() {
     return (
       <div>
