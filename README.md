@@ -38,4 +38,5 @@ For Server-side coding:
 3. Install composer globally
 4. For Authentication: Install the php-jwt library using Composer in your root folder --> composer require firebase/php-jwt 
 5. For Password reset mail: Install the PHPMailer using composer --> composer require phpmailer/phpmailer
+6. Inorder to use the php mailer to send mail to your account without authentication issue, turn on the setting of "Access for less secure apps" in your security section of google account.
 
