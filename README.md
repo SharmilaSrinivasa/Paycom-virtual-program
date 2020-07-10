@@ -36,5 +36,6 @@ For Server-side coding:
 1. Create folder inside htdocs of xampp for php code part.
 2. Building the PHP application that implements the JWT-protected REST API.
 3. Install composer globally
-4. Install the php-jwt library using Composer in your root folder --> composer require firebase/php-jwt
+4. For Authentication: Install the php-jwt library using Composer in your root folder --> composer require firebase/php-jwt 
+5. For Password reset mail: Install the PHPMailer using composer --> composer require phpmailer/phpmailer
 
