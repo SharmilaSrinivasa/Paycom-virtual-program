@@ -1,9 +1,10 @@
 # Program-Planner
 Summer Engagement Program Planner
-
+----------------------------------
 The goal of this project is to create a web app to assist with planning a multi-session event like  Training Engagement Program. This project will focus on critical aspects of full-stack web development such as user access & security, server-side and client-side development, and UI/UX considerations.
 
 Functional Requirements
+------------------------
 1. Users must be authenticated & authorized to be able to access the website.
 2. A user must be able to create an event session.
 3. A user must be able to edit an event session.
@@ -12,16 +13,19 @@ Functional Requirements
 6. A session must include a date & time, a title, and a description.
 
 Non-Functional Requirements
+---------------------------
 1. Front-end code - React. 
 2. Server-side code - Php.
 3. Database - MySQL
 
-For Database:
+Database:
+---------
 1. Download xampp and start MySQL and Apache services.
 2. Enable localhost over SSH.
 2. Create database using phpmyadmin in localhost.
 
-For Client Side: 
+Client Side: 
+------------
 1. Install NodeJS https://nodejs.org/en/
 2. Create folder inside the htdocs of xampp for the frontend code part.
 3. Install React using -> npm install -g create-react-app
@@ -32,7 +36,8 @@ For Client Side:
 8. Install React router module to enable router service using -> npm install --save react-router-dom
 9. For users authentication & authorization using Axios to send API calls and handle JWT tokens.
 
-For Server-side coding:
+Server-side:
+------------
 1. Create folder inside htdocs of xampp for php code part.
 2. Building the PHP application that implements the JWT-protected REST API.
 3. Install composer globally
