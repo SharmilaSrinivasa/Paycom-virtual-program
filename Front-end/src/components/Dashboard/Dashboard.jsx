@@ -13,6 +13,7 @@ class Dashboard extends Component {
     this.state = {
       events: [],
       redirect: false,
+      message: false,
     };
   }
 
@@ -24,6 +25,9 @@ class Dashboard extends Component {
       )
       .then((response) => {
         this.setState({ events: response.data });
+        if (this.state.events.length === 0) {
+          this.setState({ message: true });
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -64,7 +68,6 @@ class Dashboard extends Component {
   }
 
   register(eventId) {
-    console.log(this.state);
     let obj = { user_email: this.props.match.params.emailId };
     axios
       .post(
@@ -72,44 +75,48 @@ class Dashboard extends Component {
           eventId,
         obj
       )
-      .then(this.setState({ redirect: true }), alert("Registered Successfully"))
+      .then((res) => {
+        this.setState({ redirect: true });
+      })
       .catch((err) => console.log(err));
   }
 
   render() {
     let user_email = this.props.match.params.emailId;
-    const { redirect } = this.state.redirect;
-    console.log("this.state.redirect: ", redirect);
+    let redirect = this.state.redirect;
+    let message = this.state.message;
     if (redirect) {
-      console.log("inside: ", redirect);
-      return <Redirect to={"/dashboard/" + user_email} />;
+      return <Redirect to={"/registeredevents/" + user_email} />;
     }
-
     return (
-      <div>
-        <Navbar bg="light" expand="lg">
-          <Navbar.Brand>Dashboard</Navbar.Brand>
-          <Navbar.Collapse className="justify-content-end">
-            <Link to={"/registeredevents/" + user_email}>
-              Registered Events
-            </Link>
-            <Nav.Link href="/">Logout</Nav.Link>
-          </Navbar.Collapse>
-        </Navbar>
-        <h4 align="center"> Events List</h4>
-        <table className="table table-striped" style={{ marginTop: 20 }}>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Location</th>
-              <th>Description</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>{this.renderTableData()}</tbody>
-        </table>
+      <div className="image2">
+        <div>
+          <Navbar bg="light" expand="lg">
+            <Navbar.Brand>Dashboard</Navbar.Brand>
+            <Navbar.Collapse className="justify-content-end">
+              <Link to={"/registeredevents/" + user_email}>
+                Registered Events
+              </Link>
+              <Nav.Link href="/">Logout</Nav.Link>
+            </Navbar.Collapse>
+          </Navbar>
+          <h4 align="center"> Events List</h4>
+          <h5 align="center">{message ? "No new events to register" : null}</h5>
+
+          <table className="table table-striped" style={{ marginTop: 20 }}>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Location</th>
+                <th>Description</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>{this.renderTableData()}</tbody>
+          </table>
+        </div>
       </div>
     );
   }

@@ -13,7 +13,6 @@ $errors = array();
 
 if (isset($postdata) && !empty($postdata)) {
     $request = json_decode($postdata);
-    //print_r($request);
 
     // Sanitize
     $role = $request->role;
@@ -31,15 +30,15 @@ if (isset($postdata) && !empty($postdata)) {
     }
 
     if (count($errors) == 0) {
-        $password = md5($password);
-        $sql = "INSERT INTO Users (role, email, password)
-        VALUES ('{$role}', '{$email}', '{$password}')";
-        if ($conn->query($sql) === true) {
+        $password_hash = password_hash($password, PASSWORD_BCRYPT);
+        $insertUser = "INSERT INTO Users (role, email, password)
+        VALUES ('{$role}', '{$email}', '{$password_hash}')";
+        if ($conn->query($insertUser) === true) {
             http_response_code(200);
             echo json_encode(array("message" => "User was successfully registered."));
         } else {
             http_response_code(400);
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "Error: " . $insertUser . "<br>" . $conn->error;
         }
     } else {
         http_response_code(400);

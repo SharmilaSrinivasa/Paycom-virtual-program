@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Form, Button, Col } from "react-bootstrap";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import "./Home.css";
 
 class UpdateEvent extends Component {
   constructor(props) {
@@ -24,7 +27,6 @@ class UpdateEvent extends Component {
   }
 
   componentDidMount() {
-    console.log("mounted", this.props.params);
     axios
       .get(
         "http://localhost:8080/react-php/api/getById.php?id=" +
@@ -89,11 +91,16 @@ class UpdateEvent extends Component {
           this.props.match.params.id,
         obj
       )
-      // .then((res) => console.log(res.data), this.setState({ redirect: true }));
       .then((res) => {
         if (res.status) {
-          this.setState({ redirect: true });
+          if (res.status === 200) {
+            this.setState({ redirect: true });
+          }
         }
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert("Date and time already exists!");
       });
   }
 
@@ -103,66 +110,78 @@ class UpdateEvent extends Component {
       return <Redirect to="/home" />;
     }
     return (
-      <div className="row">
-        <div className="column bodypart">
-          <h1>Update Event</h1>
-          <Form onSubmit={this.onSubmit}>
-            <Form.Row>
-              <Form.Group as={Col} controlId="formGridEvent">
-                <Form.Label>Event Title</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.event_title}
-                  onChange={this.onChangeEventTitle}
-                />
-              </Form.Group>
-            </Form.Row>
+      <div className="image2">
+        <div>
+          <Navbar bg="light" expand="lg">
+            <Navbar.Brand>Update Event</Navbar.Brand>
+            <Navbar.Collapse className="justify-content-end">
+              <Nav.Link href="/home">Home</Nav.Link>
+              <Nav.Link href="/">Logout</Nav.Link>
+            </Navbar.Collapse>
+          </Navbar>
+          <div className="container">
+            <div className="col-xs-8">
+              <br /> <br />
+              <Form onSubmit={this.onSubmit}>
+                <Form.Row>
+                  <Form.Group as={Col} controlId="formGridEvent">
+                    <Form.Label>Event Title</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={this.state.event_title}
+                      onChange={this.onChangeEventTitle}
+                    />
+                  </Form.Group>
+                </Form.Row>
 
-            <Form.Row>
-              <Form.Group as={Col} controlId="formGridStartDate">
-                <Form.Label>Date</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={this.state.event_date}
-                  onChange={this.onChangeEventDate}
-                />
-              </Form.Group>
+                <Form.Row>
+                  <Form.Group as={Col} controlId="formGridStartDate">
+                    <Form.Label>Date</Form.Label>
+                    <Form.Control
+                      type="date"
+                      value={this.state.event_date}
+                      onChange={this.onChangeEventDate}
+                    />
+                  </Form.Group>
 
-              <Form.Group as={Col} controlId="formGridEndtDate">
-                <Form.Label>Time</Form.Label>
-                <Form.Control
-                  type="time"
-                  value={this.state.event_time}
-                  onChange={this.onChangeEventTime}
-                />
-              </Form.Group>
-            </Form.Row>
+                  <Form.Group as={Col} controlId="formGridTime">
+                    <Form.Label>Time</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={this.state.event_time}
+                      onChange={this.onChangeEventTime}
+                    />
+                  </Form.Group>
+                </Form.Row>
 
-            <Form.Row>
-              <Form.Group as={Col} controlId="formGridLocation">
-                <Form.Label>Location</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.location}
-                  onChange={this.onChangeLocation}
-                />
-              </Form.Group>
-            </Form.Row>
+                <Form.Row>
+                  <Form.Group as={Col} controlId="formGridLocation">
+                    <Form.Label>Location</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={this.state.location}
+                      onChange={this.onChangeLocation}
+                    />
+                  </Form.Group>
+                </Form.Row>
 
-            <Form.Group controlId="formGridDescription">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows="3"
-                value={this.state.description}
-                onChange={this.onChangeDescription}
-              />
-            </Form.Group>
+                <Form.Group controlId="formGridDescription">
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows="3"
+                    value={this.state.description}
+                    onChange={this.onChangeDescription}
+                  />
+                </Form.Group>
+                <br />
 
-            <Button variant="primary" type="submit">
-              Update
-            </Button>
-          </Form>
+                <Button variant="primary" size="lg" block type="submit">
+                  Update
+                </Button>
+              </Form>
+            </div>
+          </div>
         </div>
       </div>
     );

@@ -1,49 +1,81 @@
 import React, { Component } from "react";
+import axios from "axios";
+import { Form, Button } from "react-bootstrap";
 import "./ForgotPassword.css";
 
 class ForgotPassword extends Component {
   constructor(props) {
     super(props);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+
     this.state = {
       email: "",
+      emailStatus: "",
     };
-    this.reset = this.reset.bind(this);
-    this.onChange = this.onChange.bind(this);
   }
 
-  reset() {
-    console.log("reset Function");
+  onChangeEmail(e) {
+    this.setState({
+      email: e.target.value,
+    });
   }
 
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state);
+  onSubmit(e) {
+    e.preventDefault();
+    const { email } = this.state;
+    axios
+      .post(
+        "http://localhost:8080/react-php/api/forgotPassword.php?sendto=" + email
+      )
+      .then((res) => {
+        this.setState({ emailStatus: res.data });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    this.setState({
+      email: "",
+    });
   }
+
   render() {
+    const { email, emailStatus } = this.state;
     return (
-      <div className="row small-up-2 medium-up-3">
-        <div className="column bodypart">
-          <form>
-            <h3>Reset Password</h3>
-            <div className="form-group">
-              <label>Email address</label>
-              <input
-                type="email"
-                className="form-control"
-                name="email"
-                placeholder="Enter email"
-                onChange={this.onChange}
-              />
+      <div>
+        <br />
+        <div className="image">
+          <div className="container">
+            <div className="row">
+              <br /> <br />
+              <div className="col-md-6 offset-md-8">
+                <br /> <br />
+                {emailStatus ? emailStatus : null}
+                <Form onSubmit={this.onSubmit}>
+                  <p className="text-right">
+                    <a href="/login">Login</a>
+                  </p>
+                  <br />
+                  <p className="card-title">
+                    Please enter your email account so we can assist you in
+                    recovering your account!
+                  </p>
+                  <Form.Group controlId="formBasicEmail">
+                    <Form.Control
+                      type="email"
+                      placeholder="Enter email"
+                      value={email}
+                      onChange={this.onChangeEmail}
+                    />
+                  </Form.Group>
+                  <Button variant="primary" size="lg" block type="submit">
+                    Submit
+                  </Button>
+                </Form>
+              </div>
             </div>
-            <button
-              type="submit"
-              value="Login"
-              className="btn btn-primary btn-block"
-              onClick={this.login}
-            >
-              Submit
-            </button>
-          </form>
+          </div>
         </div>
       </div>
     );

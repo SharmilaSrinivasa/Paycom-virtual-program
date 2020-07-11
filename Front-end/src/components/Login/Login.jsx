@@ -46,19 +46,15 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password,
     };
-    // console.log(obj);
-    let obj1 = await login(obj);
-    //console.log("response from authjs:", obj1);
-    if (obj1 === undefined) {
+    let result = await login(obj);
+    if (result === undefined) {
       alert("Login error, check your email and password");
-      //console.log("Login failed");
     } else {
       this.setState({ redirect: true });
-      var arr = obj1.split(",");
+      var arr = result.split(",");
       var arr1 = JSON.parse(arr);
       this.setState({ role: arr1.role });
       this.setState({ email: arr1.email });
-      //console.log("obj1: ", obj1);
     }
   }
 
@@ -72,10 +68,12 @@ class Login extends Component {
       return <Redirect to={"/dashboard/" + email} />;
     }
     return (
-      <div className="container">
-        <div className="col-xs-8">
-          <div className="card">
-            <div className="card-body">
+      <div className="image">
+        <div className="container">
+          <div className="row">
+            <br /> <br />
+            <div className="col-md-6 offset-md-8">
+              <br /> <br />
               <Form onSubmit={this.onSubmit}>
                 <p className="text-right">
                   Don't have an account? <a href="/signup">Signup</a>
@@ -111,8 +109,11 @@ class Login extends Component {
                     onChange={this.onChangePassword}
                   />
                 </Form.Group>
+                <p className="text-right">
+                  Forgot <a href="/forgotpassword">Password</a>
+                </p>
 
-                <Button variant="primary" type="submit">
+                <Button variant="primary" size="lg" block type="submit">
                   Login
                 </Button>
               </Form>

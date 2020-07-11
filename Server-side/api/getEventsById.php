@@ -10,10 +10,10 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 $userEmail = $_GET['userEmail'];
 $events = [];
 $details = [];
-$sql = "SELECT * FROM AttendeeList
+$queryForAttendeeList = "SELECT * FROM AttendeeList
 WHERE userEmail = '{$userEmail}'";
 
-if ($result = mysqli_query($conn, $sql)) {
+if ($result = mysqli_query($conn, $queryForAttendeeList)) {
     if ($result->num_rows > 0) {
         $cr = 0;
         while ($row = mysqli_fetch_assoc($result)) {
@@ -22,13 +22,12 @@ if ($result = mysqli_query($conn, $sql)) {
             $events[$cr]['userEmail'] = $row['userEmail'];
             $cr++;
         }
-        //  print_r($events);
         $index = 0;
         foreach ($events as $request) {
             foreach ($request as $key => $value) {
                 if ($key == "eventId") {
-                    $sql2 = "SELECT * FROM events WHERE eventId = '{$value}'";
-                    if ($result2 = mysqli_query($conn, $sql2)) {
+                    $queryForEvent = "SELECT * FROM events WHERE eventId = '{$value}'";
+                    if ($result2 = mysqli_query($conn, $queryForEvent)) {
                         $row2 = mysqli_fetch_assoc($result2);
                         $details[$index] = $row2;
                     } else {
@@ -38,8 +37,6 @@ if ($result = mysqli_query($conn, $sql)) {
             }
             $index++;
         }
-        //echo json_encode($events);
-        //  print_r($details);
         echo json_encode($details);
     } else {
         echo "0 results";

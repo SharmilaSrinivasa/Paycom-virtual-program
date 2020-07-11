@@ -13,7 +13,6 @@ class RecordList extends Component {
   }
 
   delete() {
-    //console.log("test: " + this.props.obj.eventId);
     axios
       .get(
         "http://localhost:8080/react-php/api/delete.php?id=" +
@@ -24,7 +23,6 @@ class RecordList extends Component {
   }
   render() {
     const { redirect } = this.state;
-    //console.log("val: ", redirect);
     if (redirect) {
       return <Redirect to="/home" />;
     }

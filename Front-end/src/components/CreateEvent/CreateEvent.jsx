@@ -3,6 +3,7 @@ import { Form, Button, Col } from "react-bootstrap";
 import axios from "axios";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import { Link } from "react-router-dom";
 
 class CreateEvent extends Component {
   constructor(props) {
@@ -62,14 +63,10 @@ class CreateEvent extends Component {
       location: this.state.location,
       description: this.state.description,
     };
-    console.log(obj);
-
     axios
       .post("http://localhost:8080/react-php/api/insert.php", obj)
       .then((res) => {
-        console.log(res.status);
         if (res.status === 200) {
-          console.log("event created successfully");
           alert("event created successfully!");
         }
       })
@@ -89,75 +86,78 @@ class CreateEvent extends Component {
 
   render() {
     return (
-      <div>
-        <Navbar bg="light" expand="lg">
-          <Navbar.Brand>Create Event</Navbar.Brand>
-          <Navbar.Collapse className="justify-content-end">
-            <Nav.Link href="/home">Home</Nav.Link>
-            <Nav.Link href="/">Logout</Nav.Link>
-          </Navbar.Collapse>
-        </Navbar>
-        <div className="container">
-          <div className="col-xs-8">
-            <Form onSubmit={this.onSubmit}>
-              <Form.Row>
-                <Form.Group as={Col} controlId="formGridEvent">
-                  <Form.Label>Event Title</Form.Label>
+      <div className="image2">
+        <div>
+          <Navbar bg="light" expand="lg">
+            <Navbar.Brand>Create Event</Navbar.Brand>
+            <Navbar.Collapse className="justify-content-end">
+              <Link to={"/home"}>Home</Link>
+              <Nav.Link href="/">Logout</Nav.Link>
+            </Navbar.Collapse>
+          </Navbar>
+          <div className="container">
+            <div className="col-xs-8">
+              <br /> <br />
+              <Form onSubmit={this.onSubmit}>
+                <Form.Row>
+                  <Form.Group as={Col} controlId="formGridEvent">
+                    <Form.Label>Event Title</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter event title"
+                      value={this.state.event_title}
+                      onChange={this.onChangeEventTitle}
+                    />
+                  </Form.Group>
+                </Form.Row>
+
+                <Form.Row>
+                  <Form.Group as={Col} controlId="formGridStartDate">
+                    <Form.Label>Date</Form.Label>
+                    <Form.Control
+                      type="date"
+                      value={this.state.event_date}
+                      onChange={this.onChangeEventDate}
+                    />
+                  </Form.Group>
+
+                  <Form.Group as={Col} controlId="formGridEndtDate">
+                    <Form.Label>Time</Form.Label>
+                    <Form.Control
+                      type="time"
+                      value={this.state.event_time}
+                      onChange={this.onChangeEventTime}
+                    />
+                  </Form.Group>
+                </Form.Row>
+
+                <Form.Row>
+                  <Form.Group as={Col} controlId="formGridLocation">
+                    <Form.Label>Location</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter location"
+                      value={this.state.location}
+                      onChange={this.onChangeLocation}
+                    />
+                  </Form.Group>
+                </Form.Row>
+
+                <Form.Group controlId="formGridDescription">
+                  <Form.Label>Description</Form.Label>
                   <Form.Control
-                    type="text"
-                    placeholder="Enter event title"
-                    value={this.state.event_title}
-                    onChange={this.onChangeEventTitle}
+                    as="textarea"
+                    rows="3"
+                    value={this.state.description}
+                    onChange={this.onChangeDescription}
                   />
                 </Form.Group>
-              </Form.Row>
-
-              <Form.Row>
-                <Form.Group as={Col} controlId="formGridStartDate">
-                  <Form.Label>Date</Form.Label>
-                  <Form.Control
-                    type="date"
-                    value={this.state.event_date}
-                    onChange={this.onChangeEventDate}
-                  />
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="formGridEndtDate">
-                  <Form.Label>Time</Form.Label>
-                  <Form.Control
-                    type="time"
-                    value={this.state.event_time}
-                    onChange={this.onChangeEventTime}
-                  />
-                </Form.Group>
-              </Form.Row>
-
-              <Form.Row>
-                <Form.Group as={Col} controlId="formGridLocation">
-                  <Form.Label>Location</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter location"
-                    value={this.state.location}
-                    onChange={this.onChangeLocation}
-                  />
-                </Form.Group>
-              </Form.Row>
-
-              <Form.Group controlId="formGridDescription">
-                <Form.Label>Description</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  rows="3"
-                  value={this.state.description}
-                  onChange={this.onChangeDescription}
-                />
-              </Form.Group>
-
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
-            </Form>
+                <br />
+                <Button variant="primary" size="lg" block type="submit">
+                  Submit
+                </Button>
+              </Form>
+            </div>
           </div>
         </div>
       </div>

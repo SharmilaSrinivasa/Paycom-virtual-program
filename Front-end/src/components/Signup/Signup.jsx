@@ -45,16 +45,13 @@ class Signup extends Component {
       email: this.state.email,
       password: this.state.password,
     };
-    let obj1 = await signup(obj);
-    //console.log("test: ", obj1);
-    if (obj1 !== 0) {
+    let result = await signup(obj);
+    if (result !== 0) {
       this.setState({ redirect: true });
-      var arr = obj1.split(",");
+      var arr = result.split(",");
       var arr1 = JSON.parse(arr);
       this.setState({ role: arr1.role });
       this.setState({ email: arr1.email });
-      //console.log("prop2:", this.props);
-      //console.log("obj1: ", arr1.role);
     } else {
       alert("Email exists");
     }
@@ -70,10 +67,12 @@ class Signup extends Component {
       return <Redirect to={"/dashboard/" + email} />;
     }
     return (
-      <div className="container">
-        <div className="col-xs-8">
-          <div className="card">
-            <div className="card-body">
+      <div className="image">
+        <div className="container">
+          <div className="row">
+            <br /> <br />
+            <div className="col-md-6 offset-md-8">
+              <br /> <br />
               <Form onSubmit={this.onSubmit}>
                 <p className="text-right">
                   Already have an account? <a href="/login">Login</a>
@@ -110,7 +109,7 @@ class Signup extends Component {
                   />
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
+                <Button variant="primary" size="lg" block type="submit">
                   Sign up
                 </Button>
               </Form>

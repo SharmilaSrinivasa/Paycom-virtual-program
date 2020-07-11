@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-//import { Redirect } from "react-router-dom";
 import axios from "axios";
 import "./RegisteredEvents.css";
 import Navbar from "react-bootstrap/Navbar";
@@ -9,7 +8,7 @@ import { Link } from "react-router-dom";
 class RegisteredEvents extends Component {
   constructor(props) {
     super(props);
-    this.state = { eventsDetails: [] };
+    this.state = { eventsDetails: [], message: false };
   }
 
   componentDidMount() {
@@ -20,8 +19,9 @@ class RegisteredEvents extends Component {
       )
       .then((response) => {
         this.setState({ eventsDetails: response.data });
-
-        console.log("sharmi: ", this.state.eventsDetails);
+        if (this.state.eventsDetails === "0 results") {
+          this.setState({ message: true });
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -32,55 +32,59 @@ class RegisteredEvents extends Component {
       this.state.eventsDetails.length === 0 ||
       this.state.eventsDetails === "0 results"
     ) {
-      console.log("0 record");
       return;
+    } else {
+      return this.state.eventsDetails.map((eventsDetails, index) => {
+        const {
+          eventId,
+          title,
+          event_date,
+          event_time,
+          location,
+          description,
+        } = eventsDetails;
+        return (
+          <tr key={eventId}>
+            <td>{title}</td>
+            <td>{event_date}</td>
+            <td>{event_time}</td>
+            <td>{location}</td>
+            <td>{description}</td>
+          </tr>
+        );
+      });
     }
-    return this.state.eventsDetails.map((eventsDetails, index) => {
-      const {
-        eventId,
-        title,
-        event_date,
-        event_time,
-        location,
-        description,
-      } = eventsDetails;
-      return (
-        <tr key={eventId}>
-          <td>{title}</td>
-          <td>{event_date}</td>
-          <td>{event_time}</td>
-          <td>{location}</td>
-          <td>{description}</td>
-        </tr>
-      );
-    });
   }
 
   render() {
+    let message = this.state.message;
     return (
-      <div>
-        <Navbar bg="light" expand="lg">
-          <Navbar.Brand>Registered Events</Navbar.Brand>
-          <Navbar.Collapse className="justify-content-end">
-            <Link to={"/dashboard/" + this.props.match.params.id}>
-              Dashboard
-            </Link>
-            <Nav.Link href="/">Logout</Nav.Link>
-          </Navbar.Collapse>
-        </Navbar>
-        <h4 align="center"> Events List</h4>
-        <table className="table table-striped" style={{ marginTop: 20 }}>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Location</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>{this.renderTableData()}</tbody>
-        </table>
+      <div className="image2">
+        <div>
+          <Navbar bg="light" expand="lg">
+            <Navbar.Brand>Registered Events</Navbar.Brand>
+            <Navbar.Collapse className="justify-content-end">
+              <Link to={"/dashboard/" + this.props.match.params.id}>
+                Dashboard
+              </Link>
+              <Nav.Link href="/">Logout</Nav.Link>
+            </Navbar.Collapse>
+          </Navbar>
+          <h4 align="center"> Events List</h4>
+          <h5 align="center">{message ? "No registered Event List" : null}</h5>
+          <table className="table table-striped" style={{ marginTop: 20 }}>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Location</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>{this.renderTableData()}</tbody>
+          </table>
+        </div>
       </div>
     );
   }

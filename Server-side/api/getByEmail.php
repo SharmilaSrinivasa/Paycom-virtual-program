@@ -9,14 +9,12 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 $emailId = $_GET['emailId'];
 
-$sql = "SELECT * FROM Users
+$queryForEmail = "SELECT * FROM Users
 WHERE email = '{$emailId}' LIMIT 1";
 
-$result = mysqli_query($conn, $sql);
+$result = mysqli_query($conn, $queryForEmail);
 $row = mysqli_fetch_assoc($result);
-//print_r($row);
 
 echo $json = json_encode($row);
-//echo json_encode(['data'=>$json]);
 
 $conn->close();

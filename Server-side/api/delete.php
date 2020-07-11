@@ -9,11 +9,15 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 $id = $_GET['id'];
 
-$sql = "DELETE FROM events
+$deleteEvent = "DELETE FROM events
 WHERE eventId = '{$id}' LIMIT 1";
 
-if (mysqli_query($conn, $sql)) {
-    http_response_code(204);
+if (mysqli_query($conn, $deleteEvent)) {
+    $deleteAttendeeEntry = "DELETE FROM AttendeeList
+    WHERE eventId = '{$id}'";
+    if (mysqli_query($conn, $deleteAttendeeEntry)) {
+        http_response_code(204);
+    }
 } else {
     return http_response_code(422);
 }

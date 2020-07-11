@@ -1,25 +1,26 @@
 import React, { Component } from "react";
-import logo from "../../images/Paycom-Generic.png";
+import { Button } from "react-bootstrap";
 import "./Welcome.css";
 
 class Welcome extends Component {
   render() {
     return (
-      <div className="container">
-        <div className="row small-up-2">
-          <div className="medium-6 columns">
-            <h1>Program Planner </h1>
-            <h3> Software for everyone! </h3>
-            <br />
-            <a href="/signup" className="button large">
-              SignUp
-            </a>
-            <a href="/login" className="button large hollow">
-              Login
-            </a>
-          </div>
-          <div className="medium-6 columns">
-            <img className="thumbnail" src={logo} alt="Planner" />
+      <div className="image">
+        <div className="container">
+          <div className="row">
+            <br /> <br />
+            <div className="col-md-6 offset-md-10">
+              <br /> <br />
+              <h1>Program Planner </h1>
+              <h3> Paycom's program planner is for the our interns </h3>
+              <br />
+              <Button href="/signup" size="lg">
+                SignUp
+              </Button>{" "}
+              <Button href="/login" variant="outline-primary" size="lg">
+                Login
+              </Button>
+            </div>
           </div>
         </div>
       </div>

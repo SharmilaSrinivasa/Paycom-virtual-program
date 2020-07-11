@@ -9,14 +9,11 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 $id = $_GET['id'];
 
-$sql = "SELECT * FROM events
+$queryForEvent = "SELECT * FROM events
 WHERE eventId = '{$id}' LIMIT 1";
 
-$result = mysqli_query($conn, $sql);
+$result = mysqli_query($conn, $queryForEvent);
 $row = mysqli_fetch_assoc($result);
-//print_r($row);
 
 echo $json = json_encode($row);
-//echo json_encode(['data'=>$json]);
-
 exit;

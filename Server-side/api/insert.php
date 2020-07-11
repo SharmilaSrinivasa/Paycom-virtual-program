@@ -8,10 +8,10 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 $postdata = file_get_contents("php://input");
+$errors = array();
 
 if (isset($postdata) && !empty($postdata)) {
     $request = json_decode($postdata);
-    print_r($request);
 
     // Sanitize
     $event_title = $request->event_title;
@@ -19,14 +19,33 @@ if (isset($postdata) && !empty($postdata)) {
     $event_time = $request->event_time;
     $location = $request->location;
     $description = $request->description;
+    $event_time = strtotime($event_time);
+    $event_time_12hr = date('h:i a', $event_time);
 
-    $sql = "INSERT INTO events (title, event_date, event_time, location, description)
-    VALUES ( '{$event_title}', '{$event_date}', '{$event_time}', '{$location}', '{$description}')";
+    $check_query = "SELECT * FROM events
+    WHERE event_date = '$event_date' AND event_time = '$event_time_12hr'";
+    $result = mysqli_query($conn, $check_query);
+    $eventMatch = mysqli_fetch_assoc($result);
+    print_r($eventMatch);
 
-    if ($conn->query($sql) === true) {
-        echo "New record created successfully";
+    if ($eventMatch) {
+        array_push($errors, "This date and time were already taken");
+    }
+
+    if (count($errors) == 0) {
+
+        $insertEvent = "INSERT INTO events (title, event_date, event_time, location, description)
+    VALUES ( '{$event_title}', '{$event_date}', '{$event_time_12hr}', '{$location}', '{$description}')";
+
+        if ($conn->query($insertEvent) === true) {
+            echo "New record created successfully!";
+        } else {
+            http_response_code(404);
+            echo "Error: " . $insertEvent . "<br>" . $conn->error;
+        }
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        http_response_code(401);
+        echo json_encode(array("error" => "date and time exists", "date" => $event_date, "time" => $event_time));
     }
 
     $conn->close();

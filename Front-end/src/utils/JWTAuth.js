@@ -10,7 +10,6 @@ const signup = async (data) => {
       url: SIGNUP_ENDPOINT,
       data: data,
     });
-    console.log("response:", response.config.data);
     return response.config.data;
   } catch (e) {
     console.log(e);
@@ -25,7 +24,6 @@ const login = async (data) => {
   try {
     let response = await axios.post(LOGIN_ENDPOINT, data);
     console.log(response);
-
     if (
       response.status === 200 &&
       response.data.jwt &&

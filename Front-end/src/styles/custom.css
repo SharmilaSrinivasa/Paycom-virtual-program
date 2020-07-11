@@ -18,3 +18,13 @@ table.searchclass {
   table-layout: auto;
   width: 100%;
 }
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #006400 !important;
+  color: white;
+  text-align: center;
+}

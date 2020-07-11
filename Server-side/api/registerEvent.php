@@ -15,18 +15,16 @@ if (isset($postdata) && !empty($postdata)) {
     //Extract the data.
     $request = json_decode($postdata);
 
-    //print_r($request);
-
     //Sanitize.
     $event_id = $_GET['eventId'];
     $user_email = $request->user_email;
 
-    $sql = "INSERT INTO AttendeeList (eventId, userEmail) VALUES ( '{$event_id}', '{$user_email}')";
+    $insertAttendee = "INSERT INTO AttendeeList (eventId, userEmail) VALUES ( '{$event_id}', '{$user_email}')";
 
-    if ($conn->query($sql) === true) {
+    if ($conn->query($insertAttendee) === true) {
         echo "New record created successfully";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $insertAttendee . "<br>" . $conn->error;
     }
 }
 
