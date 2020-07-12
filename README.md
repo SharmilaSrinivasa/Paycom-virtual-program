@@ -47,4 +47,4 @@ Server-side:
 
 Website Demo:
 -------------
-Check the WebsiteDemo file to view the project demo.
+Check the ProjectDemo file to view the project demo.
