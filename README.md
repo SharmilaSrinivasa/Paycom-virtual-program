@@ -45,3 +45,6 @@ Server-side:
 5. For Password reset mail: Install the PHPMailer using composer --> composer require phpmailer/phpmailer
 6. Inorder to use the php mailer to send mail to your account without authentication issue, turn on the setting of "Access for less secure apps" in your security section of google account.
 
+Website Demo:
+-------------
+Check the WebsiteDemo file to view the project demo.
