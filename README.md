@@ -42,7 +42,7 @@ Testing:
 2. Install flow-bin for type checking using --> npm install --save-dev flow-bin
 3. Add a "flow" script to your package.json file.
 4. For congif intall --> npm run flow init
-5. Install enzyme --> npm install --save enzyme react-test-renderer enzyme-adapter-react-16
+5. Install enzyme library using --> npm install --save enzyme react-test-renderer enzyme-adapter-react-16
 
 Server-side:
 ------------
