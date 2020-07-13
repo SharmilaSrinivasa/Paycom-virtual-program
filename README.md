@@ -56,3 +56,46 @@ Server-side:
 Website Demo:
 -------------
 Check the ProjectDemo file to view the project demo.
+
+UI:
+--
+1. Welcome page:
+![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.46.22%20PM.png)
+
+2. Signup page:
+![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.54.17%20PM.png)
+
+3. Login page:
+![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.52.14%20PM.png)
+
+4. Login with error message for wrong credential:
+![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.52.25%20PM.png)
+
+4. Forgot Password:
+![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.52.44%20PM.png)
+
+5. Email from website:
+![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.53.26%20PM.png)
+
+6. Reset password:
+![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.53.47%20PM.png)
+
+6. User's Dashboard (for interns): Listed events to register
+![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.51.14%20PM.png)
+
+7. User's Registered List (for interns): After registering available events
+![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.51.32%20PM.png)
+
+8. Admin's home Page: To view the attendees list for each event along with edit and delete
+![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.54.42%20PM.png)
+
+9. Admin's Event create page:
+![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.56.02%20PM.png)
+
+10. Admin's Event update page:
+![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.56.15%20PM.png)
+
+11. Admin's home Page: after creating new event, the attendees is zero because no user registered for it.
+![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.56.29%20PM.png)
+
+
