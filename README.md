@@ -57,8 +57,8 @@ Website Demo:
 -------------
 Check the ProjectDemo file to view the project demo.
 
-UI:
---
+Client-side - UI:
+---------------
 1. Welcome page:
 ![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.46.22%20PM.png)
 
@@ -98,4 +98,10 @@ UI:
 11. Admin's home Page: after creating new event, the attendees is zero because no user registered for it.
 ![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.56.29%20PM.png)
 
+Database Screenshots:
+---------------------
+DB: Planner
+![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%205.24.18%20PM.png)
+![]()
+![]()
 
