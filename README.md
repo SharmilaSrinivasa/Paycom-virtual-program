@@ -36,6 +36,13 @@ Client Side:
 8. Install React router module to enable router service using -> npm install --save react-router-dom
 9. For users authentication & authorization using Axios to send API calls and handle JWT tokens.
 
+Testing:
+-------------
+1. Unit testing with Jest and React testing.
+2. Install flow-bin for type checking using --> npm install --save-dev flow-bin
+3. Add a "flow" script to your package.json file.
+4. For congif intall --> npm run flow init
+
 Server-side:
 ------------
 1. Create folder inside htdocs of xampp for php code part.
