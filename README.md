@@ -65,7 +65,7 @@ UI:
 2. Signup page:
 ![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.54.17%20PM.png)
 
-3. Login page: example- admin login
+3. Login page:
 ![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.52.14%20PM.png)
 
 4. Login with error message for wrong credential:
@@ -90,9 +90,12 @@ UI:
 ![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.54.42%20PM.png)
 
 9. Admin's Event create page:
+![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.56.02%20PM.png)
+
+10. Admin's Event update page:
 ![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.56.15%20PM.png)
 
-10. Admin's home Page: after creating new event, the attendees is zero because no user registered for it.
+11. Admin's home Page: after creating new event, the attendees is zero because no user registered for it.
 ![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.56.29%20PM.png)
 
 
