@@ -59,4 +59,9 @@ Check the ProjectDemo file to view the project demo.
 
 UI:
 --
+1.Welcome page
+![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.46.22%20PM.png)
+
+2.Signup page
+
 
