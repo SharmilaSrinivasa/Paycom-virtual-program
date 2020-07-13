@@ -56,3 +56,7 @@ Server-side:
 Website Demo:
 -------------
 Check the ProjectDemo file to view the project demo.
+
+UI:
+--
+
