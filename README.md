@@ -38,7 +38,7 @@ Client Side:
 
 Testing:
 -------------
-1. Unit testing with Jest and React testing.
+1. Unit testing with Jest and React testing (already installed with creat-react-app).
 2. Install flow-bin for type checking using --> npm install --save-dev flow-bin
 3. Add a "flow" script to your package.json file.
 4. For congif intall --> npm run flow init
