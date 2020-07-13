@@ -102,6 +102,8 @@ Database Screenshots:
 ---------------------
 DB: Planner
 ![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%205.24.18%20PM.png)
-![]()
-![]()
+
+![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%205.24.31%20PM.png)
+
+![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%205.24.39%20PM.png)
 
