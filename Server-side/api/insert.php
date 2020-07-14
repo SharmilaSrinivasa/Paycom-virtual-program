@@ -38,13 +38,15 @@ if (isset($postdata) && !empty($postdata)) {
     VALUES ( '{$event_title}', '{$event_date}', '{$event_time_12hr}', '{$location}', '{$description}')";
 
         if ($conn->query($insertEvent) === true) {
-            echo "New record created successfully!";
+            http_response_code(200);
+            echo json_encode(array("message" => "New record created successfully!"));
+            // echo "New record created successfully!";
         } else {
-            http_response_code(404);
+            http_response_code(401);
             echo "Error: " . $insertEvent . "<br>" . $conn->error;
         }
     } else {
-        http_response_code(401);
+        http_response_code(400);
         echo json_encode(array("error" => "date and time exists", "date" => $event_date, "time" => $event_time));
     }
 
