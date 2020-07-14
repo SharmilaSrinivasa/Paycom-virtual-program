@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Form, Button, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import { Link } from "react-router-dom";
 
 class CreateEvent extends Component {
   constructor(props) {
@@ -14,14 +14,17 @@ class CreateEvent extends Component {
     this.onChangeLocation = this.onChangeLocation.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onReset = this.onReset.bind(this);
 
-    this.state = {
+    this.initialState = {
       event_title: "",
       event_date: "",
       event_time: "",
       location: "",
       description: "",
     };
+
+    this.state = this.initialState;
   }
 
   onChangeEventTitle(e) {
@@ -52,6 +55,11 @@ class CreateEvent extends Component {
     this.setState({
       description: e.target.value,
     });
+  }
+
+  onReset(e) {
+    e.preventDefault();
+    this.setState(this.initialState);
   }
 
   onSubmit(e) {
@@ -155,6 +163,15 @@ class CreateEvent extends Component {
                 <br />
                 <Button variant="primary" size="lg" block type="submit">
                   Submit
+                </Button>
+                <Button
+                  variant="primary"
+                  size="lg"
+                  block
+                  type="button"
+                  onClick={this.onReset}
+                >
+                  Reset
                 </Button>
               </Form>
             </div>

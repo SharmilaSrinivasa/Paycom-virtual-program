@@ -4,6 +4,8 @@ import { Form, Button } from "react-bootstrap";
 import { login } from "../../utils/JWTAuth.js";
 import "./Login.css";
 
+const ROLE = ["User", "Admin"];
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +15,7 @@ class Login extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      role: "",
+      role: ROLE[0],
       email: "",
       password: "",
       redirect: false,
@@ -82,12 +84,13 @@ class Login extends Component {
 
                 <Form.Group controlId="formBasicRole">
                   <Form.Label>Role</Form.Label>
-                  <Form.Control
-                    type="tex"
-                    placeholder="Admin/User"
-                    value={this.state.role}
-                    onChange={this.onChangeRole}
-                  />
+                  <select value={this.state.role} onChange={this.onChangeRole}>
+                    {ROLE.map((c) => (
+                      <option key={c} value={c}>
+                        {c}
+                      </option>
+                    ))}
+                  </select>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicEmail">
