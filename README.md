@@ -90,7 +90,7 @@ Client-side - UI:
 ![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.54.42%20PM.png)
 
 9. Admin's Event create page:
-![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.56.02%20PM.png)
+![](Screenshots-UI/Screen%20Shot%202020-07-14%20at%205.13.08%20PM.png)
 
 10. Admin's Event update page:
 ![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.56.15%20PM.png)
