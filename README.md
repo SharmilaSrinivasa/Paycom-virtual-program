@@ -36,7 +36,7 @@ Client Side:
 8. Install React router module to enable router service using -> npm install --save react-router-dom
 9. For users authentication & authorization using Axios to send API calls and handle JWT tokens.
 
-Testing:
+Unit Testing:
 -------------
 1. Unit testing with Jest and React testing (already installed with creat-react-app).
 2. Install flow-bin for type checking using --> npm install --save-dev flow-bin
