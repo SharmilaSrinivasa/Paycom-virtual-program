@@ -41,6 +41,7 @@ class Login extends Component {
     });
   }
 
+  //async and await till our api call resolved
   async onSubmit(e) {
     e.preventDefault();
     const obj = {
@@ -82,9 +83,13 @@ class Login extends Component {
                 </p>
                 <h3>Login</h3>
 
-                <Form.Group controlId="formBasicRole">
+                <Form.Group>
                   <Form.Label>Role</Form.Label>
-                  <select value={this.state.role} onChange={this.onChangeRole}>
+                  <select
+                    value={this.state.role}
+                    onChange={this.onChangeRole}
+                    id="role-input"
+                  >
                     {ROLE.map((c) => (
                       <option key={c} value={c}>
                         {c}
@@ -93,20 +98,22 @@ class Login extends Component {
                   </select>
                 </Form.Group>
 
-                <Form.Group controlId="formBasicEmail">
+                <Form.Group>
                   <Form.Label>Email address</Form.Label>
-                  <Form.Control
+                  <input
                     type="email"
+                    id="email-input"
                     placeholder="Enter email"
                     value={this.state.email}
                     onChange={this.onChangeEmail}
                   />
                 </Form.Group>
 
-                <Form.Group controlId="formBasicPassword">
+                <Form.Group>
                   <Form.Label>Password</Form.Label>
-                  <Form.Control
+                  <input
                     type="password"
+                    id="password-input"
                     placeholder="Password"
                     value={this.state.password}
                     onChange={this.onChangePassword}

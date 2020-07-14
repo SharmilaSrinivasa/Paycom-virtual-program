@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Button, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { createEvent } from "../../utils/JWTAuth.js";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 
@@ -14,7 +14,7 @@ class CreateEvent extends Component {
     this.onChangeLocation = this.onChangeLocation.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.onReset = this.onReset.bind(this);
+    this.reset = this.reset.bind(this);
 
     this.initialState = {
       event_title: "",
@@ -57,12 +57,11 @@ class CreateEvent extends Component {
     });
   }
 
-  onReset(e) {
-    e.preventDefault();
+  reset() {
     this.setState(this.initialState);
   }
 
-  onSubmit(e) {
+  async onSubmit(e) {
     e.preventDefault();
     const obj = {
       event_title: this.state.event_title,
@@ -71,17 +70,12 @@ class CreateEvent extends Component {
       location: this.state.location,
       description: this.state.description,
     };
-    axios
-      .post("http://localhost:8080/react-php/api/insert.php", obj)
-      .then((res) => {
-        if (res.status === 200) {
-          alert("event created successfully!");
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-        alert("Date and time already exists!");
-      });
+    let response = await createEvent(obj);
+    if (response.status === 200) {
+      alert("event created successfully!");
+    } else {
+      alert("Event date and time already exists!");
+    }
 
     this.setState({
       event_title: "",
@@ -108,10 +102,11 @@ class CreateEvent extends Component {
               <br /> <br />
               <Form onSubmit={this.onSubmit}>
                 <Form.Row>
-                  <Form.Group as={Col} controlId="formGridEvent">
+                  <Form.Group as={Col}>
                     <Form.Label>Event Title</Form.Label>
-                    <Form.Control
+                    <input
                       type="text"
+                      id="title-input"
                       placeholder="Enter event title"
                       value={this.state.event_title}
                       onChange={this.onChangeEventTitle}
@@ -120,19 +115,21 @@ class CreateEvent extends Component {
                 </Form.Row>
 
                 <Form.Row>
-                  <Form.Group as={Col} controlId="formGridStartDate">
+                  <Form.Group as={Col}>
                     <Form.Label>Date</Form.Label>
-                    <Form.Control
+                    <input
                       type="date"
+                      id="date-input"
                       value={this.state.event_date}
                       onChange={this.onChangeEventDate}
                     />
                   </Form.Group>
 
-                  <Form.Group as={Col} controlId="formGridEndtDate">
+                  <Form.Group as={Col}>
                     <Form.Label>Time</Form.Label>
-                    <Form.Control
+                    <input
                       type="time"
+                      id="time-input"
                       value={this.state.event_time}
                       onChange={this.onChangeEventTime}
                     />
@@ -140,10 +137,11 @@ class CreateEvent extends Component {
                 </Form.Row>
 
                 <Form.Row>
-                  <Form.Group as={Col} controlId="formGridLocation">
+                  <Form.Group as={Col}>
                     <Form.Label>Location</Form.Label>
-                    <Form.Control
+                    <input
                       type="text"
+                      id="location-input"
                       placeholder="Enter location"
                       value={this.state.location}
                       onChange={this.onChangeLocation}
@@ -151,10 +149,11 @@ class CreateEvent extends Component {
                   </Form.Group>
                 </Form.Row>
 
-                <Form.Group controlId="formGridDescription">
+                <Form.Group>
                   <Form.Label>Description</Form.Label>
                   <Form.Control
                     as="textarea"
+                    id="textarea-input"
                     rows="3"
                     value={this.state.description}
                     onChange={this.onChangeDescription}
@@ -169,7 +168,7 @@ class CreateEvent extends Component {
                   size="lg"
                   block
                   type="button"
-                  onClick={this.onReset}
+                  onClick={this.reset}
                 >
                   Reset
                 </Button>
