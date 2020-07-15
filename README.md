@@ -38,11 +38,12 @@ Client Side:
 
 Unit Testing:
 -------------
-1. Unit testing with Jest and React testing (already installed with creat-react-app).
-2. Install enzyme library using --> npm install --save enzyme react-test-renderer enzyme-adapter-react-16
-3. Install flow-bin for type checking using --> npm install --save-dev flow-bin
-4. Add a "flow" script to your package.json file.
-5. For congif intall --> npm run flow init
+1. Unit testing for React component using Jest and Enzyme
+2. The create-react-app already installed Jest and its dependencies.
+3. Install enzyme library using --> npm install --save enzyme react-test-renderer enzyme-adapter-react-16
+4. Install flow-bin for type checking using --> npm install --save-dev flow-bin
+5. Add a "flow" script to your package.json file.
+6. For congif intall --> npm run flow init
  
 Server-side:
 ------------
