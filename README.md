@@ -63,7 +63,7 @@ Client-side - UI:
 ![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.46.22%20PM.png)
 
 2. Signup page:
-![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.54.17%20PM.png)
+![](Screenshots-UI/Screen%20Shot%202020-07-15%20at%2012.49.37%20AM.png)
 
 3. Login page:
 ![](Screenshots-UI/Screen%20Shot%202020-07-15%20at%2012.49.18%20AM.png)
