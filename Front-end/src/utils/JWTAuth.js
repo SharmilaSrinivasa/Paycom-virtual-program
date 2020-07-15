@@ -94,7 +94,8 @@ const viewEvent = async () => {
   const VIEW_ENDPOINT = `http://localhost:8080/react-php/api/view.php`;
   try {
     let response = await axios.get(VIEW_ENDPOINT);
-    return response;
+    // console.log(response.data);
+    return response.data;
   } catch (e) {
     console.log(e);
   }
@@ -142,7 +143,7 @@ const viewUnregisteredEvents = async (email) => {
   const UNREGSEVENT_ENDPOINT = `http://localhost:8080/react-php/api/unregistered.php?userEmail=`;
   try {
     let response = await axios.get(UNREGSEVENT_ENDPOINT + email);
-    return response;
+    return response.data;
   } catch (e) {
     console.log(e);
   }
@@ -169,7 +170,7 @@ const getRegisteredEvent = async (email) => {
   const GETREGSEVENT_ENDPOINT = `http://localhost:8080/react-php/api/getEventsById.php?userEmail=`;
   try {
     let response = await axios.get(GETREGSEVENT_ENDPOINT + email);
-    return response;
+    return response.data;
   } catch (e) {
     console.log(e);
   }

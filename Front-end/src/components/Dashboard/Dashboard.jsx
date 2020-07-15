@@ -21,7 +21,7 @@ class Dashboard extends Component {
     let response = await viewUnregisteredEvents(
       this.props.match.params.emailId
     );
-    this.setState({ events: response.data });
+    this.setState({ events: response });
     if (this.state.events.length === 0) {
       this.setState({ message: true });
     }

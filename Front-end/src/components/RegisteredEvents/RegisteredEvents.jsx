@@ -13,7 +13,7 @@ class RegisteredEvents extends Component {
 
   async componentDidMount() {
     let response = await getRegisteredEvent(this.props.match.params.id);
-    this.setState({ eventsDetails: response.data });
+    this.setState({ eventsDetails: response });
     if (this.state.eventsDetails === "0 results") {
       this.setState({ message: true });
     }

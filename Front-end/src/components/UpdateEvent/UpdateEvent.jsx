@@ -104,10 +104,11 @@ class UpdateEvent extends Component {
               <br /> <br />
               <Form onSubmit={this.onSubmit}>
                 <Form.Row>
-                  <Form.Group as={Col} controlId="formGridEvent">
+                  <Form.Group as={Col}>
                     <Form.Label>Event Title</Form.Label>
-                    <Form.Control
+                    <input
                       type="text"
+                      id="title-input"
                       value={this.state.event_title}
                       onChange={this.onChangeEventTitle}
                     />
@@ -117,8 +118,9 @@ class UpdateEvent extends Component {
                 <Form.Row>
                   <Form.Group as={Col} controlId="formGridStartDate">
                     <Form.Label>Date</Form.Label>
-                    <Form.Control
+                    <input
                       type="date"
+                      id="date-input"
                       value={this.state.event_date}
                       onChange={this.onChangeEventDate}
                     />
@@ -126,8 +128,9 @@ class UpdateEvent extends Component {
 
                   <Form.Group as={Col} controlId="formGridTime">
                     <Form.Label>Time</Form.Label>
-                    <Form.Control
+                    <input
                       type="text"
+                      id="time-input"
                       value={this.state.event_time}
                       onChange={this.onChangeEventTime}
                     />
@@ -137,18 +140,20 @@ class UpdateEvent extends Component {
                 <Form.Row>
                   <Form.Group as={Col} controlId="formGridLocation">
                     <Form.Label>Location</Form.Label>
-                    <Form.Control
+                    <input
                       type="text"
+                      id="location-input"
                       value={this.state.location}
                       onChange={this.onChangeLocation}
                     />
                   </Form.Group>
                 </Form.Row>
 
-                <Form.Group controlId="formGridDescription">
+                <Form.Group>
                   <Form.Label>Description</Form.Label>
                   <Form.Control
                     as="textarea"
+                    id="textarea-input"
                     rows="3"
                     value={this.state.description}
                     onChange={this.onChangeDescription}

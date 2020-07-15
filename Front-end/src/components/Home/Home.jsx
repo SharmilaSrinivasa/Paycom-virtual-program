@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-//import axios from "axios";
 import "./Home.css";
 import RecordsList from "./RecordsList";
 import Navbar from "react-bootstrap/Navbar";
@@ -15,7 +14,7 @@ class Home extends Component {
 
   async componentDidMount() {
     let response = await viewEvent();
-    this.setState({ events: response.data });
+    this.setState({ events: response });
     this.setState({ emailId: this.props.match.params.emailId });
   }
 
