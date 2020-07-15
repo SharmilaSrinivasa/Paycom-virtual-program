@@ -55,9 +55,10 @@ class ForgotPassword extends Component {
                     Please enter your email account so we can assist you in
                     recovering your account!
                   </p>
-                  <Form.Group controlId="formBasicEmail">
-                    <Form.Control
+                  <Form.Group>
+                    <input
                       type="email"
+                      id="email-input"
                       placeholder="Enter email"
                       value={email}
                       onChange={this.onChangeEmail}
