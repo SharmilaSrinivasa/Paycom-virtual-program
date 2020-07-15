@@ -38,11 +38,12 @@ Client Side:
 
 Unit Testing:
 -------------
-1. Unit testing with Jest and React testing (already installed with creat-react-app).
-2. Install enzyme library using --> npm install --save enzyme react-test-renderer enzyme-adapter-react-16
-3. Install flow-bin for type checking using --> npm install --save-dev flow-bin
-4. Add a "flow" script to your package.json file.
-5. For congif intall --> npm run flow init
+1. Unit testing for React component using Jest and Enzyme
+2. The create-react-app already installed Jest and its dependencies.
+3. Install enzyme library using --> npm install --save enzyme react-test-renderer enzyme-adapter-react-16
+4. Install flow-bin for type checking using --> npm install --save-dev flow-bin
+5. Add a "flow" script to your package.json file.
+6. For congif intall --> npm run flow init
  
 Server-side:
 ------------
@@ -63,10 +64,10 @@ Client-side - UI:
 ![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.46.22%20PM.png)
 
 2. Signup page:
-![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.54.17%20PM.png)
+![](Screenshots-UI/Screen%20Shot%202020-07-15%20at%2012.49.37%20AM.png)
 
 3. Login page:
-![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.52.14%20PM.png)
+![](Screenshots-UI/Screen%20Shot%202020-07-15%20at%2012.49.18%20AM.png)
 
 4. Login with error message for wrong credential:
 ![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.52.25%20PM.png)
