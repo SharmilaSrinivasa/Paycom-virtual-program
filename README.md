@@ -66,7 +66,7 @@ Client-side - UI:
 ![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.54.17%20PM.png)
 
 3. Login page:
-![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.52.14%20PM.png)
+![](Screenshots-UI/Screen%20Shot%202020-07-15%20at%2012.49.18%20AM.png)
 
 4. Login with error message for wrong credential:
 ![](Screenshots-UI/Screen%20Shot%202020-07-13%20at%204.52.25%20PM.png)
