@@ -1,0 +1,13 @@
+.rightshift {
+  float: right;
+  margin: 10px 0px;
+}
+.image2 {
+  background-image: url(../../images/lap.jpg);
+  height: 100%;
+  position: fixed;
+  min-width: 100%;
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}

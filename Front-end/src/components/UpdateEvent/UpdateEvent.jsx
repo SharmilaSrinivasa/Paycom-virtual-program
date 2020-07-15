@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Form, Button, Col } from "react-bootstrap";
-import axios from "axios";
+import { getEventDetailById, updateEvent } from "../../utils/JWTAuth.js";
 import { Redirect } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import "./Home.css";
+import "./UpdateEvent.css";
 
 class UpdateEvent extends Component {
   constructor(props) {
@@ -26,24 +26,15 @@ class UpdateEvent extends Component {
     };
   }
 
-  componentDidMount() {
-    axios
-      .get(
-        "http://localhost:8080/react-php/api/getById.php?id=" +
-          this.props.match.params.id
-      )
-      .then((response) => {
-        this.setState({
-          event_title: response.data.title,
-          event_date: response.data.event_date,
-          event_time: response.data.event_time,
-          location: response.data.location,
-          description: response.data.description,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  async componentDidMount() {
+    let response = await getEventDetailById(this.props.match.params.id);
+    this.setState({
+      event_title: response.data.title,
+      event_date: response.data.event_date,
+      event_time: response.data.event_time,
+      location: response.data.location,
+      description: response.data.description,
+    });
   }
 
   onChangeEventTitle(e) {
@@ -76,7 +67,7 @@ class UpdateEvent extends Component {
     });
   }
 
-  onSubmit(e) {
+  async onSubmit(e) {
     e.preventDefault();
     const obj = {
       event_title: this.state.event_title,
@@ -85,23 +76,12 @@ class UpdateEvent extends Component {
       location: this.state.location,
       description: this.state.description,
     };
-    axios
-      .post(
-        "http://localhost:8080/react-php/api/update.php?id=" +
-          this.props.match.params.id,
-        obj
-      )
-      .then((res) => {
-        if (res.status) {
-          if (res.status === 200) {
-            this.setState({ redirect: true });
-          }
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-        alert("Date and time already exists!");
-      });
+    let response = await updateEvent(obj, this.props.match.params.id);
+    if (response.status === 200) {
+      this.setState({ redirect: true });
+    } else {
+      alert("Event date and time already exists!");
+    }
   }
 
   render() {

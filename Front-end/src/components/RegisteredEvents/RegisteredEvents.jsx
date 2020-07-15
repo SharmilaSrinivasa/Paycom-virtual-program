@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { getRegisteredEvent } from "../../utils/JWTAuth.js";
 import "./RegisteredEvents.css";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -11,22 +11,14 @@ class RegisteredEvents extends Component {
     this.state = { eventsDetails: [], message: false };
   }
 
-  componentDidMount() {
-    axios
-      .get(
-        "http://localhost:8080/react-php/api/getEventsById.php?userEmail=" +
-          this.props.match.params.id
-      )
-      .then((response) => {
-        this.setState({ eventsDetails: response.data });
-        if (this.state.eventsDetails === "0 results") {
-          this.setState({ message: true });
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  async componentDidMount() {
+    let response = await getRegisteredEvent(this.props.match.params.id);
+    this.setState({ eventsDetails: response.data });
+    if (this.state.eventsDetails === "0 results") {
+      this.setState({ message: true });
+    }
   }
+
   renderTableData() {
     if (
       this.state.eventsDetails.length === 0 ||

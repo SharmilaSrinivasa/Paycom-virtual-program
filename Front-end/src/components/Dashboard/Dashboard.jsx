@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import axios from "axios";
+import { viewUnregisteredEvents, registerEvent } from "../../utils/JWTAuth.js";
 import "./Dashboard.css";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -17,21 +17,14 @@ class Dashboard extends Component {
     };
   }
 
-  componentDidMount() {
-    axios
-      .get(
-        "http://localhost:8080/react-php/api/unregistered.php?userEmail=" +
-          this.props.match.params.emailId
-      )
-      .then((response) => {
-        this.setState({ events: response.data });
-        if (this.state.events.length === 0) {
-          this.setState({ message: true });
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  async componentDidMount() {
+    let response = await viewUnregisteredEvents(
+      this.props.match.params.emailId
+    );
+    this.setState({ events: response.data });
+    if (this.state.events.length === 0) {
+      this.setState({ message: true });
+    }
   }
 
   renderTableData() {
@@ -67,18 +60,12 @@ class Dashboard extends Component {
     });
   }
 
-  register(eventId) {
+  async register(eventId) {
     let obj = { user_email: this.props.match.params.emailId };
-    axios
-      .post(
-        "http://localhost:8080/react-php/api/registerEvent.php?eventId=" +
-          eventId,
-        obj
-      )
-      .then((res) => {
-        this.setState({ redirect: true });
-      })
-      .catch((err) => console.log(err));
+    let response = await registerEvent(obj, eventId);
+    if (response.status === 200) {
+      this.setState({ redirect: true });
+    }
   }
 
   render() {

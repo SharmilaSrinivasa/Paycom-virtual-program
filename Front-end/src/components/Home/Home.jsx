@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import axios from "axios";
+//import axios from "axios";
 import "./Home.css";
 import RecordsList from "./RecordsList";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
+import { viewEvent } from "../../utils/JWTAuth.js";
 
 class Home extends Component {
   constructor(props) {
@@ -12,16 +13,10 @@ class Home extends Component {
     this.state = { events: [] };
   }
 
-  componentDidMount() {
-    axios
-      .get("http://localhost:8080/react-php/api/view.php")
-      .then((response) => {
-        this.setState({ events: response.data });
-        this.setState({ emailId: this.props.match.params.emailId });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  async componentDidMount() {
+    let response = await viewEvent();
+    this.setState({ events: response.data });
+    this.setState({ emailId: this.props.match.params.emailId });
   }
 
   eventsList() {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { forgotPassword } from "../../utils/JWTAuth.js";
 import { Form, Button } from "react-bootstrap";
 import "./ForgotPassword.css";
 
@@ -21,19 +21,13 @@ class ForgotPassword extends Component {
     });
   }
 
-  onSubmit(e) {
+  async onSubmit(e) {
     e.preventDefault();
     const { email } = this.state;
-    axios
-      .post(
-        "http://localhost:8080/react-php/api/forgotPassword.php?sendto=" + email
-      )
-      .then((res) => {
-        this.setState({ emailStatus: res.data });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    let result = await forgotPassword(email);
+    if (result) {
+      this.setState({ emailStatus: result.data });
+    }
 
     this.setState({
       email: "",

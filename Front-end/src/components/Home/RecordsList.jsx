@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { deleteEvent } from "../../utils/JWTAuth.js";
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -12,15 +12,11 @@ class RecordList extends Component {
     };
   }
 
-  delete() {
-    axios
-      .get(
-        "http://localhost:8080/react-php/api/delete.php?id=" +
-          this.props.obj.eventId
-      )
-      .then(this.setState({ redirect: true }))
-      .catch((err) => console.log(err));
+  async delete() {
+    await deleteEvent(this.props.obj.eventId);
+    this.setState({ redirect: true });
   }
+
   render() {
     const { redirect } = this.state;
     if (redirect) {
