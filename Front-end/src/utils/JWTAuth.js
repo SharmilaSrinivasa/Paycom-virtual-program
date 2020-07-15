@@ -52,6 +52,20 @@ const forgotPassword = async (email) => {
   }
 };
 
+// passwordReset method
+const passwordReset = async (obj, email) => {
+  try {
+    let response = await axios.post(
+      "http://localhost:8080/react-php/api/resetPassword.php?sendto=" + email,
+      obj
+    );
+    // console.log(response);
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 // logout method
 const logout = () => {
   localStorage.removeItem("access_token");
@@ -171,6 +185,7 @@ export {
   updateEvent,
   deleteEvent,
   forgotPassword,
+  passwordReset,
   viewUnregisteredEvents,
   registerEvent,
   getRegisteredEvent,

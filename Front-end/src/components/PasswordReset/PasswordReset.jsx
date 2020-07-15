@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { passwordReset } from "../../utils/JWTAuth.js";
 import { Form, Button } from "react-bootstrap";
-import "./ForgotPassword.css";
+import "./PasswordReset.css";
 
-class ForgotPassword extends Component {
+class PasswordReset extends Component {
   constructor(props) {
     super(props);
     this.onChangePassword = this.onChangePassword.bind(this);
@@ -21,21 +21,15 @@ class ForgotPassword extends Component {
     });
   }
 
-  onSubmit(e) {
+  async onSubmit(e) {
     e.preventDefault();
     const obj = { password: this.state.password };
-    axios
-      .post(
-        "http://localhost:8080/react-php/api/resetPassword.php?sendto=" +
-          this.props.match.params.userEmail,
-        obj
-      )
-      .then((res) => {
-        this.setState({ passwordStatus: res.data });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    let result = await passwordReset(obj, this.props.match.params.userEmail);
+    console.log(result);
+    if (result) {
+      //console.log(result.data.message);
+      this.setState({ passwordStatus: result.data.message });
+    }
     this.setState({
       password: "",
     });
@@ -59,9 +53,10 @@ class ForgotPassword extends Component {
                   </p>
                   <br />
                   <p className="card-title">Please enter your new password!</p>
-                  <Form.Group controlId="formBasicPassword">
-                    <Form.Control
+                  <Form.Group>
+                    <input
                       type="password"
+                      id="password-input"
                       placeholder="Password"
                       value={password}
                       onChange={this.onChangePassword}
@@ -79,4 +74,4 @@ class ForgotPassword extends Component {
     );
   }
 }
-export default ForgotPassword;
+export default PasswordReset;

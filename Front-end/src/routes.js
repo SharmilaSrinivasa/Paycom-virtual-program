@@ -8,7 +8,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Home from "./components/Home/Home";
 import NotFound from "./components/NotFound/NotFound";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
-import PasswordReset from "./components/ForgotPassword/PasswordReset";
+import PasswordReset from "./components/PasswordReset/PasswordReset";
 import CreateEvent from "./components/CreateEvent/CreateEvent";
 import UpdateEvent from "./components/UpdateEvent/UpdateEvent";
 import RegisteredEvents from "./components/RegisteredEvents/RegisteredEvents";
