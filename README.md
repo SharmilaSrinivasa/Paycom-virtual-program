@@ -34,7 +34,7 @@ Client Side:
 6. Install bootstrap framework for UI framework using -> npm install bootstrap --save
 7. Install vanilla bootstrap for customizing the sass file using -> npm install react-bootstrap bootstrap
 8. Install React router module to enable router service using -> npm install --save react-router-dom
-9. For users authentication & authorization using Axios to send API calls and handle JWT tokens.
+9. For HTTP request, using Axios library (async and await)
 
 Unit Testing:
 -------------
@@ -50,7 +50,7 @@ Server-side:
 1. Create folder inside htdocs of xampp for php code part.
 2. Building the PHP application that implements the JWT-protected REST API.
 3. Install composer globally
-4. For Authentication: Install the php-jwt library using Composer in your root folder --> composer require firebase/php-jwt 
+4. For Authorization: Install the php-jwt library using Composer in your root folder --> composer require firebase/php-jwt 
 5. For Password reset mail: Install the PHPMailer using composer --> composer require phpmailer/phpmailer
 6. Inorder to use the php mailer to send mail to your account without authentication issue, turn on the setting of "Access for less secure apps" in your security section of google account.
 
